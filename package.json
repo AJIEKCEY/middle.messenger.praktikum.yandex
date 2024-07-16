@@ -9,6 +9,10 @@
     "preview": "vite preview",
     "start" : "vite build"
   },
+  "engines" : {
+    "npm" : "10.8.1",
+    "node" : "20.11.1"
+  },
   "devDependencies": {
     "vite": "^5.3.1"
   },
