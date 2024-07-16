@@ -1,0 +1,47 @@
+.chat__item{
+    display: flex;
+    padding: 10px 15px;
+}
+
+.chat__item_active{
+    background: rgba(83, 91, 242, 0.7);
+}
+
+.chat__content{
+    margin-left: 15px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.chat__info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat__message{
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+}
+
+.chat__content p{
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.chat__content h4{
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.chat__unreadCount{
+    align-self: end;
+    background-color: #435fa6;
+    padding: 0 10px;
+    border-radius: 15px 15px;
+    margin-left: 10px;
+}
+
+.chat__when{
+    align-self: end;
+}
