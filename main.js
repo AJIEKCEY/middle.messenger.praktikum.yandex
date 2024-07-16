@@ -5,6 +5,6 @@ document.customEventListeners = null;
 
 const app = new App({}, targetElement )
 
-await app.render();
+app.render();
 
 

@@ -18,14 +18,11 @@ class App {
     `
   }
 
-  async render() {
-
+  render() {
     this.targetEl.innerHTML = this.template(this.data);
 
     this.chats.eventListeners();
   }
-
-
 
 
 }
