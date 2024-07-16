@@ -43,7 +43,7 @@ class Settings{
 
   template (data = this.data) {
     return `
-      <div class="error__wrapper">
+      <div class="settings__wrapper">
         <a href="" onclick="customEventListenersRender404(event)">Ошибка 404</a>
         <a href="" onclick="customEventListenersRender500(event)">Ошибка 500</a>
         <a href="" onclick="customEventListenersRenderProfile(event)">Профиль</a>
