@@ -1,8 +1,10 @@
-import './src/style.css'
+import App from './src/components/App/App.js'
+
+const targetElement = document.getElementById('app');
+document.customEventListeners = null;
+
+const app = new App({}, targetElement )
+
+await app.render();
 
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    It works!
-  </div>
-`
