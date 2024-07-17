@@ -12,7 +12,7 @@ class Settings{
   eventListeners() {
     document.customEventListenersRemove = (event) => {
       event.preventDefault();
-      event.target.parentElement.remove();
+      event.target.closest(".settings__wrapper").remove();
     }
 
     document.customEventListenersRender404 = (event) => {

@@ -27,7 +27,7 @@ class EntryForm{
   eventListeners(){
     document.customEventListenersRemove = (event) => {
       event.preventDefault();
-      event.target.parentElement.remove();
+      event.target.parentElement.parentElement.remove();
     }
   }
 
