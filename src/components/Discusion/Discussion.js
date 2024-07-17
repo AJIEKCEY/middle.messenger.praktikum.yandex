@@ -32,7 +32,7 @@ class Discussion {
         </div>        
         <div class="discussion__input">
           <div class="discussion__input__buttons"></div>
-          <input type="text">
+          <input type="text" name="message">
           <button> > </button>
         </div>
       </div>   

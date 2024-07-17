@@ -1,5 +1,5 @@
 .chats__wrapper{
-    background: var(--color-light-gray);
+    background: var(--color-gray-242);
     width: 400px;
     height: 100vh;
 }
@@ -25,7 +25,7 @@
 .search__input input{
     width: 100%;
     height: 100%;
-    background-color: #DBDBDB;
+    background-color: var(--color-gray-219);
     border-radius: 5px;
     padding: 10px 40px 10px 10px;
 }

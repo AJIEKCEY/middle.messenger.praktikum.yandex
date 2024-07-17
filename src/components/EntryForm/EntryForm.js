@@ -36,7 +36,9 @@ class EntryForm{
       <div class="entryform__wrapper">
         <div class="entryform__item">
           <h1>${ctx.formName}</h1>
-          ${this.renderFields(ctx.fields)}
+          <form action="">
+            ${this.renderFields(ctx.fields)}
+          </form>
           <button>${ctx.buttonLabel}</button>
           <p class="color-blue">${ctx.linkLabel}</p>
           

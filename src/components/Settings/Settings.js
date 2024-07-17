@@ -27,7 +27,12 @@ class Settings{
 
     document.customEventListenersRenderProfile = (event) => {
       event.preventDefault();
-      new Profile().render();
+      new Profile({type: "view"}).render();
+    }
+
+    document.customEventListenersRenderProfileEdit = (event) => {
+      event.preventDefault();
+      new Profile({type: "edit"}).render();
     }
 
     document.customEventListenersRenderRegistration = (event) => {
@@ -43,15 +48,15 @@ class Settings{
 
   template (data = this.data) {
     return `
-      <div class="settings__wrapper">
+      <nav class="settings__wrapper">
         <a href="" onclick="customEventListenersRender404(event)">Ошибка 404</a>
         <a href="" onclick="customEventListenersRender500(event)">Ошибка 500</a>
         <a href="" onclick="customEventListenersRenderProfile(event)">Профиль</a>
+        <a href="" onclick="customEventListenersRenderProfileEdit(event)">Профиль Редактирование</a>
         <a href="" onclick="customEventListenersRenderRegistration(event)">Регистрация</a>
         <a href="" onclick="customEventListenersRenderAuthorization(event)">Авторизация</a>
         <a href="" onclick="customEventListenersRemove(event)">Назад к сообщениям</a>
-        
-      </div>   
+      </nav>   
     `
   }
 

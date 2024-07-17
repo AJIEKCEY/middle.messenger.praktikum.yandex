@@ -13,8 +13,10 @@ class App {
 
   template (data = this.data) {
     return `
-      <div class="left-block">${this.chats.template()}</div>
-      ${this.discussion.template()}
+      <main>
+        <div class="left-block">${this.chats.template()}</div>
+        ${this.discussion.template()}
+      </main>
     `
   }
 

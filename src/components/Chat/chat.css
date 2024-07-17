@@ -4,7 +4,7 @@
 }
 
 .chat__item_active{
-    background: rgba(83, 91, 242, 0.7);
+    background: var(--color-lightskyblue);
 }
 
 .chat__content{
@@ -36,7 +36,7 @@
 
 .chat__unreadCount{
     align-self: end;
-    background-color: #435fa6;
+    background-color: var(--color-blue);
     padding: 0 10px;
     border-radius: 15px 15px;
     margin-left: 10px;
