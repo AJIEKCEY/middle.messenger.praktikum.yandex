@@ -1,7 +1,14 @@
 :root{
     --color-white: #FFFFFF;
-    --color-light-gray: #FBFBFB;
-    --color-gray: #999999;
+    --color-gray-250: #FAFAFA;
+    --color-gray-242: #F2F2F2;
+    --color-gray-239: #EFEFEF;
+    --color-gray-234: #EAEAEA;
+    --color-gray-219: #DBDBDB;
+    --color-gray-153: #999999;
+    --color-black: #000000;
+    --color-lightskyblue: #D5E9ED;
+    --color-light-blue: #E4EDFD;
     --color-blue: #3369F3;
     --color-red: #FF0000;
 }
@@ -23,12 +30,16 @@ ul, li, h1, h2, h3, h4, p{
     padding: 0;
 }
 
+ul {
+    list-style-type: none;
+}
+
 input, button{
     border: none;
     outline: none;
 }
 
-#app{
+#app main{
     display: flex;
 }
 

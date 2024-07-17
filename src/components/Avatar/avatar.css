@@ -1,5 +1,5 @@
 .avatar{
-    background: #EFEFEF;
+    background: var(--color-gray-153);
     min-width: 50px;
     max-width: 50px;
     height: 50px;

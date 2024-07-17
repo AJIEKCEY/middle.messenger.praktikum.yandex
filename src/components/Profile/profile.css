@@ -4,7 +4,7 @@
     top: 0;
     height: 100vh;
     display: flex;
-    background: #FFFFFF;
+    background: var(--color-white);
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -24,11 +24,24 @@
     color: var(--color-gray);
 }
 
+.profile__data input{
+    text-align: end;
+}
+
 .profile__data p:not(:last-child){
-    border-bottom: 2px solid #EAEAEA;
+    border-bottom: 2px solid var(--color-gray-234);
 }
 
 .profile__link{
-    color: #3369F3;
+    color: var(--color-blue);
     cursor: pointer;
+}
+
+.profile_wrapper button{
+    color: var(--color-white);
+    background-color: var(--color-blue);
+    padding: 10px 20px;
+    min-width: 30%;
+    border-radius: 8px;
+    margin: 15px 0;
 }

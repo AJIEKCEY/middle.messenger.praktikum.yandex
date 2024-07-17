@@ -14,22 +14,22 @@ export const REGISTRATION_FORM = {
       type: "text",
     },
     {
-      id: "firstName",
+      id: "first_name",
       label: "Имя",
       type: "text",
     },
     {
-      id: "lasName",
+      id: "second_name",
       label: "Фамилия",
       type: "text",
     },
     {
-      id: "phoneNumber",
+      id: "phone",
       label: "Телефон",
       type: "tel",
     },
     {
-      id: "password1",
+      id: "password",
       label: "Пароль",
       type: "password",
     },
