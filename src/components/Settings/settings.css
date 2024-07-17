@@ -9,3 +9,8 @@
     align-items: center;
     justify-content: center;
 }
+
+
+.settings__wrapper li{
+    text-align: center;
+}

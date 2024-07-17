@@ -49,13 +49,15 @@ class Settings{
   template (data = this.data) {
     return `
       <nav class="settings__wrapper">
-        <a href="" onclick="customEventListenersRender404(event)">Ошибка 404</a>
-        <a href="" onclick="customEventListenersRender500(event)">Ошибка 500</a>
-        <a href="" onclick="customEventListenersRenderProfile(event)">Профиль</a>
-        <a href="" onclick="customEventListenersRenderProfileEdit(event)">Профиль Редактирование</a>
-        <a href="" onclick="customEventListenersRenderRegistration(event)">Регистрация</a>
-        <a href="" onclick="customEventListenersRenderAuthorization(event)">Авторизация</a>
-        <a href="" onclick="customEventListenersRemove(event)">Назад к сообщениям</a>
+        <ul>
+          <li><a href="" onclick="customEventListenersRender404(event)">Ошибка 404</a></li>
+          <li><a href="" onclick="customEventListenersRender500(event)">Ошибка 500</a></li>
+          <li><a href="" onclick="customEventListenersRenderProfile(event)">Профиль</a></li>
+          <li><a href="" onclick="customEventListenersRenderProfileEdit(event)">Профиль Редактирование</a></li>
+          <li><a href="" onclick="customEventListenersRenderRegistration(event)">Регистрация</a></li>
+          <li><a href="" onclick="customEventListenersRenderAuthorization(event)">Авторизация</a></li>
+          <li><a href="" onclick="customEventListenersRemove(event)">Назад к сообщениям</a></li>
+        </ul>
       </nav>   
     `
   }
