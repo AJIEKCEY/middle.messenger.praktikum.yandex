@@ -1,0 +1,54 @@
+:root{
+    --color-white: #FFF;
+    --color-gray-250: #FAFAFA;
+    --color-gray-242: #F2F2F2;
+    --color-gray-239: #EFEFEF;
+    --color-gray-234: #EAEAEA;
+    --color-gray-219: #DBDBDb;
+    --color-gray-153: #999;
+    --color-black: #000;
+    --color-lightskyblue: #D5E9ED;
+    --color-light-blue: #E4EDFD;
+    --color-blue: #3369F3;
+    --color-red: #fa4e4e;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ul, li, h1, h2, h3, h4, p{
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+input, button{
+    border: none;
+    outline: none;
+}
+
+.color-red{
+    color: var(--color-red);
+}
+
+.color-blue{
+    color: var(--color-blue);
+}
+
+.warning {
+  color: var(--color-red) !important;
+  border-color: var(--color-red) !important;
+  outline-color: var(--color-red) !important;
+}

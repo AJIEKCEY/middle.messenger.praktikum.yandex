@@ -1,0 +1,25 @@
+.validationMessage{
+  color: var(--color-red) !important;
+  font-size: 0.8em;
+  position: relative;
+  font-style: oblique;
+  top: -20px;
+}
+
+.form-control input + .validationMessage{
+  display: none;
+}
+
+.form-control input.warning + .validationMessage{
+  display: block;
+}
+
+.form-control label:has(+input){
+  color: var(--color-gray);
+}
+
+.form-control label:has(+input.warning){
+  color: var(--color-red);
+}
+
+
