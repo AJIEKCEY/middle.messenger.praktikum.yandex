@@ -1,8 +1,6 @@
 import Input from "./Input.ts";
 import { ComponentProps } from '../../../core/types.ts';
 
-
-
 export default (props: ComponentProps = {}) => {
 
   const { events, ...restProps } = props;

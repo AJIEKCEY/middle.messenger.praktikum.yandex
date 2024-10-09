@@ -4,7 +4,7 @@
     "useDefineForClassFields": false,
     "module": "ESNext",
     "sourceMap": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext", "dom", "dom.iterable"],
     "moduleResolution": "Node",
     "strict": true,
     "resolveJsonModule": true,
