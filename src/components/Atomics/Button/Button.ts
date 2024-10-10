@@ -1,7 +1,6 @@
 import Component from "../../../core/Component/component.ts";
 import template from "./button.tpl.ts";
 
-import "./button.css"
 
 export default class Button extends Component{
 
