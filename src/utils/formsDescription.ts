@@ -159,7 +159,8 @@ export const REGISTRATION_FORM = {
       blur: function () {
         // @ts-ignore
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
-        const valid = input.value.length > 0
+        const regex: RegExp = /^(?=.*[A-Z].*){1,}(?=.*\d.*){1,}.{8,40}$/;
+        const valid = regex.test(input.value) || input.value.length > 0
 
         // @ts-ignore
         this.setProps({
@@ -182,7 +183,8 @@ export const REGISTRATION_FORM = {
       blur: function () {
         // @ts-ignore
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
-        const valid = input.value.length > 0
+        const regex: RegExp = /^(?=.*[A-Z].*){1,}(?=.*\d.*){1,}.{8,40}$/;
+        const valid = regex.test(input.value) || input.value.length > 0
 
         // @ts-ignore
         this.setProps({
@@ -292,6 +294,281 @@ export const AUTHORIZATION_FORM = {
         })
 
         if (valid){
+          const formData = new FormData(formEl)
+          console.log(serialize(formData));
+        }
+      }
+    }
+  }
+}
+
+export const CHANGEPASSWORD_FORM = {
+  password: {
+    label: 'Старый пароль',
+    id: 'password',
+    tag: 'input',
+    type: 'password',
+    name: 'password',
+    placeholder: 'Введите пароль',
+    hasError: false,
+    events:{
+      blur: function () {
+        // @ts-ignore
+        const input: HTMLInputElement = this.getContent() as HTMLInputElement;
+        const valid = input.value.length > 0
+
+        // @ts-ignore
+        this.setProps({
+          value: input.value,
+          hasError: !valid,
+        });
+      }
+    }
+  },
+  passwordNew1: {
+    label: 'Новый пароль',
+    id: 'passwordNew1',
+    tag: 'input',
+    type: 'password',
+    name: 'passwordNew1',
+    placeholder: 'Введите пароль',
+    hasError: false,
+    events:{
+      blur: function () {
+        // @ts-ignore
+        const input: HTMLInputElement = this.getContent() as HTMLInputElement;
+        const regex: RegExp = /^(?=.*[A-Z].*){1,}(?=.*\d.*){1,}.{8,40}$/;
+        const valid = regex.test(input.value) || input.value.length > 0
+
+        // @ts-ignore
+        this.setProps({
+          value: input.value,
+          hasError: !valid,
+        });
+      }
+    }
+  },
+  passwordNew2: {
+    label: 'Повторите новый пароль',
+    id: 'passwordNew2',
+    tag: 'input',
+    type: 'password',
+    name: 'passwordNew2',
+    placeholder: 'Введите пароль еще раз',
+    hasError: false,
+    events:{
+      blur: function () {
+        // @ts-ignore
+        const input: HTMLInputElement = this.getContent() as HTMLInputElement;
+        const regex: RegExp = /^(?=.*[A-Z].*){1,}(?=.*\d.*){1,}.{8,40}$/;
+        const valid = regex.test(input.value) || input.value.length > 0
+
+        // @ts-ignore
+        this.setProps({
+          value: input.value,
+          hasError: !valid,
+        });
+      }
+    }
+  },
+  changePassBtn: {
+    text: 'Сохранить',
+    id: 'changePass__btn',
+    tag: 'button',
+    events:{
+      click: function (e:Event) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        //@ts-ignore
+        const formEl = e.target?.form;
+        const formElements = formEl.querySelectorAll('input');
+        let valid = true;
+        formElements.forEach( (element:HTMLInputElement) => {
+          if (element.value.length === 0)
+            element.classList.add('warning');
+          if (element.classList.contains('warning')){
+            valid = false
+          }
+        })
+
+        if (valid){
+          const formData = new FormData(formEl)
+          console.log(serialize(formData));
+        }
+      }
+    }
+  }
+}
+
+export const CHANGEUSERDATA_FORM = {
+  email: {
+    label: 'Почта',
+    id: 'email',
+    tag: 'input',
+    type: 'email',
+    name: 'email',
+    placeholder: 'Введите почту',
+    hasError: false,
+    validationMessage: 'Не валидная почта',
+    events: {
+      blur: function () {
+        // @ts-ignore
+        const input: HTMLInputElement = this.getContent() as HTMLInputElement;
+        const regex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const valid = regex.test(input.value) || input.value.length > 0
+
+        // @ts-ignore
+        this.setProps({
+          value: input.value,
+          hasError: !valid,
+        });
+      }
+    }
+  },
+  login: {
+    label: 'Логин',
+    id: 'login',
+    tag: 'input',
+    type: 'text',
+    name: 'login',
+    placeholder: 'Введите логин',
+    hasError: false,
+    validationMessage: 'Не валидный логин',
+    events: {
+      blur: function () {
+        // @ts-ignore
+        const input: HTMLInputElement = this.getContent() as HTMLInputElement;
+        const regex: RegExp = /^(?=.*[a-zA-Z])[-\w]{3,20}$/;
+        const valid = regex.test(input.value) || input.value.length > 0
+
+        // @ts-ignore
+        this.setProps({
+          value: input.value,
+          hasError: !valid,
+        });
+      }
+    }
+  },
+  first_name: {
+    label: 'Имя',
+    id: 'first_name',
+    tag: 'input',
+    type: 'text',
+    name: 'first_name',
+    placeholder: 'Введите имя',
+    hasError: false,
+    validationMessage: 'Не валидное имя',
+    events: {
+      blur: function () {
+        // @ts-ignore
+        const input: HTMLInputElement = this.getContent() as HTMLInputElement;
+        const regex: RegExp = /^[A-ZА-Я][a-zA-Zа-яА-Я]*$/;
+        const valid = regex.test(input.value) || input.value.length > 0
+
+        // @ts-ignore
+        this.setProps({
+          value: input.value,
+          hasError: !valid,
+        });
+      }
+    }
+  },
+  second_name: {
+    label: 'Фамилия',
+    id: 'second_name',
+    tag: 'input',
+    type: 'text',
+    name: 'second_name',
+    placeholder: 'Введите фамилию',
+    hasError: false,
+    validationMessage: 'Не валидная фамилия',
+    events: {
+      blur: function () {
+        // @ts-ignore
+        const input: HTMLInputElement = this.getContent() as HTMLInputElement;
+        const regex: RegExp = /^[A-ZА-Я][a-zA-Zа-яА-Я]*$/;
+        const valid = regex.test(input.value) || input.value.length > 0
+
+        // @ts-ignore
+        this.setProps({
+          value: input.value,
+          hasError: !valid,
+        });
+      }
+    }
+  },
+  display_name: {
+    label: 'Отображаемое имя',
+    id: 'display_name',
+    tag: 'input',
+    type: 'text',
+    name: 'display_name',
+    placeholder: 'Введите отображаемое имя',
+    hasError: false,
+    validationMessage: 'Имя должно быть написано на латинице, от 3 до 20 символов, недопустимы спец символы и пробелы, ' +
+      'допустимы дефис и нижнее подчёркивание',
+    events: {
+      blur: function () {
+        // @ts-ignore
+        const input: HTMLInputElement = this.getContent() as HTMLInputElement;
+        const regex: RegExp = /^(?=.*[a-zA-Z])[-\w]{3,20}$/;
+        const valid = regex.test(input.value) || input.value.length > 0
+
+        // @ts-ignore
+        this.setProps({
+          value: input.value,
+          hasError: !valid,
+        });
+      }
+    }
+  },
+  phone: {
+    label: 'Телефон',
+    id: 'phone',
+    tag: 'input',
+    type: 'tel',
+    name: 'phone',
+    placeholder: 'Введите номер телефона',
+    hasError: false,
+    validationMessage: 'Не корректный номер',
+    events: {
+      blur: function () {
+        // @ts-ignore
+        const input: HTMLInputElement = this.getContent() as HTMLInputElement;
+        const regex: RegExp = /^\+?\d{1,4}[-.\s]?(\(\d{1,5}\)|\d{1,5})[-.\s]?\d{1,5}[-.\s]?\d{1,5}[-.\s]?\d{1,5}[-.\s]?\d{1,5}$/;
+        const valid = regex.test(input.value) || input.value.length > 0
+
+        // @ts-ignore
+        this.setProps({
+          value: input.value,
+          hasError: !valid,
+        });
+      }
+    }
+  },
+  changeUserDataBtn: {
+    text: 'Сохранить',
+    id: 'changeUserData__btn',
+    tag: 'button',
+    events: {
+      click: function (e: Event) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        //@ts-ignore
+        const formEl = e.target?.form;
+        const formElements = formEl.querySelectorAll('input');
+        let valid = true;
+        formElements.forEach((element: HTMLInputElement) => {
+          if (element.value.length === 0)
+            element.classList.add('warning');
+          if (element.classList.contains('warning')) {
+            valid = false
+          }
+        })
+
+        if (valid) {
           const formData = new FormData(formEl)
           console.log(serialize(formData));
         }

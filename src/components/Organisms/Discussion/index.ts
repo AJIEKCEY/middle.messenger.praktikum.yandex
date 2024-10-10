@@ -2,13 +2,28 @@ import Discussion from "./Discussion.ts";
 import Avatar from "../Avatar";
 import Message from "../../Molecules/Message";
 import discussionService from "../../../mock/discussion.ts";
+import Input from "../../Atomics/Input";
 
 export default function(props = {}) {
   const CURRENT_USER_ID = 6543213;
 
+  const discussionInput = Input({
+    id: 'messageInput',
+    type: 'text',
+    name: 'messageInput',
+    events: {
+      keyup: (e:KeyboardEvent) => {
+        if (e.key === 'Enter') {
+          console.log((e.target as HTMLInputElement)?.value);
+        }
+      }
+    }
+  })
+
   const discussionComponent =  new Discussion(
     {
       ...props,
+      DiscussionInput: discussionInput,
     }
   )
 

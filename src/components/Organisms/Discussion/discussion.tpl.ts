@@ -12,7 +12,7 @@ export default `
   </div>
   <div class="discussion__input">
     <div class="discussion__input__buttons"></div>
-    <input type="text" name="message">
+    {{{DiscussionInput}}}
     <button> > </button>
   </div>
 </div>
