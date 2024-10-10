@@ -41,5 +41,3 @@ npx eslint "**/*.{js,ts}"
 npx stylelint "**/*.{css,scss,sass,styl,less,pcss}"
 npx tsc --noEmit
 ```
-
-
