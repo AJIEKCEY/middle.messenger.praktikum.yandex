@@ -6,19 +6,26 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "vite build && vite preview --port 3000"
+    "start": "vite build && vite preview --port 3000",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "lint:style": "stylelint \"**/*.pcss\"",
+    "lint:style:fix": "stylelint \"**/*.pcss\" --fix"
   },
   "engines": {
     "npm": "10.8.1",
     "node": "20.11.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.12.0",
+    "@types/eslint__js": "^8.42.3",
     "@types/uuid": "^10.0.0",
-    "eslint": "^9.8.0",
+    "eslint": "^9.12.0",
     "stylelint": "^16.8.1",
     "stylelint-config-standard": "^36.0.1",
     "stylelint-value-no-unknown-custom-properties": "^6.0.1",
-    "typescript": "^5.5.4",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.8.1",
     "vite": "^5.3.1"
   },
   "dependencies": {

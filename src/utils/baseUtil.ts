@@ -1,7 +1,7 @@
 export default function serialize (data:FormData) {
-  let obj:{[key:string]:any} = {};
+  const obj:{[key:string]:any} = {};
 
-  for (let [key, value] of data) {
+  for (const [key, value] of data) {
     if (obj[key] !== undefined) {
       if (!Array.isArray(obj[key])) {
         obj[key] = [obj[key]];

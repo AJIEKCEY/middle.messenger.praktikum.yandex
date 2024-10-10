@@ -1,6 +1,7 @@
 import ChatList from "./ChatList.ts";
 import Chat from "../../Molecules/Chat";
 import chatList from "../../../mock/chats.ts"
+import {ComponentProps} from "../../../core/types.ts";
 
 
 export default function(props = {}) {
@@ -12,7 +13,7 @@ export default function(props = {}) {
     document.querySelector(`li.chat__item[data-chat-id="${chatId}"]`)?.classList.add('chat__item_active');
   }
 
-  const getNewChatComponent = (chatProps:any) => Chat({
+  const getNewChatComponent = (chatProps:ComponentProps) => Chat({
     ...chatProps,
     events: {
       click : (e: Event) => {
@@ -36,7 +37,7 @@ export default function(props = {}) {
     },
   })
 
-  const chats =  chatList.map( (chatProps:any) => {
+  const chats =  chatList.map( (chatProps:ComponentProps) => {
     return getNewChatComponent(chatProps);
   })
 
@@ -54,17 +55,18 @@ export default function(props = {}) {
 
     const chats:object[] = [];
 
-    chatList.map( (chatProps:any) => {
-      if (chatProps.name.toLowerCase().includes(substring.toLowerCase())){
+    chatList.map( (chatProps:ComponentProps) => {
+      const chatName = chatProps.name
+      if (typeof chatName === 'string' && chatName.toLowerCase().includes(substring.toLowerCase())){
         chats.push(getNewChatComponent(chatProps)) ;
       };
     })
     return chats;
   }
 
-  // @ts-ignore
-  document.addEventListener('searchInputChange', (e: CustomEvent) => {
-    chatsList.setProps({chats: filteredChats(e.detail)})
+  //@ts-expect-error    надо разобраться с CustomEvent
+  document.addEventListener('searchInputChange', (evt: CustomEvent) => {
+    chatsList.setProps({chats: filteredChats(evt.detail)})
   })
 
   return chatsList

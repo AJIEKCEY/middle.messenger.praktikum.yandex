@@ -35,7 +35,6 @@ class PropsManager <ComponentData extends ComponentDataType> {
     }
 
     if (this._visited.has(currentObject as object)) {
-      // eslint-disable-next-line no-console
       console.warn(`Обнаружена циклическая зависимость. Объект: ${currentObject}`);
 
       return this._visited.get(currentObject as object) as T;
@@ -107,7 +106,7 @@ class PropsManager <ComponentData extends ComponentDataType> {
     }
   }
 
-  callback(index: string, item: unknown, parent: ComponentProps):Boolean {
+  callback(index: string, item: unknown, parent: ComponentProps):boolean {
     if (item instanceof Component) {
       parent[index] = `<div data-id="${item.getId()}"></div>`;
       this._children.push(item);

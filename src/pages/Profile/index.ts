@@ -9,7 +9,7 @@ import Input from "../../components/Atomics/Input";
 
 export default (prop = {}) => {
 
-  const userData = {
+  const userData:{[key:string]:string} = {
     email: "pochta@yandex.ru",
     login: "ivanivanov",
     first_name: "Иван",
@@ -26,8 +26,7 @@ export default (prop = {}) => {
         e.stopPropagation();
 
         const controls = [];
-        for (let field in CHANGEUSERDATA_FORM){
-          // @ts-ignore
+        for (const field in CHANGEUSERDATA_FORM){
           controls.push(FormControl({...CHANGEUSERDATA_FORM[field], value: userData[field] }));
         }
 
@@ -48,8 +47,7 @@ export default (prop = {}) => {
         e.stopPropagation();
 
         const controls = [];
-        for (let field in CHANGEPASSWORD_FORM){
-          // @ts-ignore
+        for (const field in CHANGEPASSWORD_FORM){
           controls.push(FormControl({...CHANGEPASSWORD_FORM[field] }));
         }
 

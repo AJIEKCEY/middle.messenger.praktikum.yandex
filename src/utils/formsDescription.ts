@@ -1,6 +1,10 @@
 import serialize from "./baseUtil.ts";
+import {ComponentProps} from "../core/types.ts";
 
-export const REGISTRATION_FORM = {
+// TODO this в обработчиках будет связываться (bind) с контекстом компонента.
+//  Как этот момент разрешить в TS я пока не разобрался.
+
+export const REGISTRATION_FORM: {[key: string]: ComponentProps} = {
   email : {
     label: 'Почта',
     id: 'email',
@@ -11,18 +15,17 @@ export const REGISTRATION_FORM = {
     hasError: false,
     validationMessage: 'Не валидная почта',
     events:{
-      blur: function () {
-        // @ts-ignore
+      blur: (function () {
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const valid = regex.test(input.value) || input.value.length > 0
-
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
         });
-      }
+      })
     }
   },
   login : {
@@ -36,12 +39,11 @@ export const REGISTRATION_FORM = {
     validationMessage: 'Не валидный логин',
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^(?=.*[a-zA-Z])[-\w]{3,20}$/;
         const valid = regex.test(input.value) || input.value.length > 0
-
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -60,12 +62,12 @@ export const REGISTRATION_FORM = {
     validationMessage: 'Не валидное имя',
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^[A-ZА-Я][a-zA-Zа-яА-Я]*$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -84,12 +86,12 @@ export const REGISTRATION_FORM = {
     validationMessage: 'Не валидная фамилия',
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^[A-ZА-Я][a-zA-Zа-яА-Я]*$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -109,12 +111,12 @@ export const REGISTRATION_FORM = {
       'допустимы дефис и нижнее подчёркивание',
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^(?=.*[a-zA-Z])[-\w]{3,20}$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -133,12 +135,12 @@ export const REGISTRATION_FORM = {
     validationMessage: 'Не корректный номер',
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^\+?\d{1,4}[-.\s]?(\(\d{1,5}\)|\d{1,5})[-.\s]?\d{1,5}[-.\s]?\d{1,5}[-.\s]?\d{1,5}[-.\s]?\d{1,5}$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -157,12 +159,12 @@ export const REGISTRATION_FORM = {
     validationMessage: 'Введите пароль',
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^(?=.*[A-Z].*){1,}(?=.*\d.*){1,}.{8,40}$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -181,12 +183,12 @@ export const REGISTRATION_FORM = {
     validationMessage: 'Введите пароль',
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^(?=.*[A-Z].*){1,}(?=.*\d.*){1,}.{8,40}$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -203,7 +205,7 @@ export const REGISTRATION_FORM = {
         e.preventDefault();
         e.stopPropagation();
 
-        //@ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const formEl = e.target?.form;
         const formElements = formEl.querySelectorAll('input');
         let valid = true;
@@ -224,7 +226,7 @@ export const REGISTRATION_FORM = {
   }
 }
 
-export const AUTHORIZATION_FORM = {
+export const AUTHORIZATION_FORM: {[key: string]: ComponentProps} = {
   login : {
     label: 'Логин',
     id: 'login',
@@ -236,12 +238,12 @@ export const AUTHORIZATION_FORM = {
     validationMessage: 'Не валидный логин',
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^(?=.*[a-zA-Z])[-\w]{3,20}$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -260,11 +262,11 @@ export const AUTHORIZATION_FORM = {
     validationMessage: 'Введите пароль',
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const valid = input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -281,7 +283,7 @@ export const AUTHORIZATION_FORM = {
         e.preventDefault();
         e.stopPropagation();
 
-        //@ts-ignore
+        //@ts-expect-error     this будет связываться (bind) с контекстом компонента
         const formEl = e.target?.form;
         const formElements = formEl.querySelectorAll('input');
         let valid = true;
@@ -302,7 +304,7 @@ export const AUTHORIZATION_FORM = {
   }
 }
 
-export const CHANGEPASSWORD_FORM = {
+export const CHANGEPASSWORD_FORM: {[key: string]: ComponentProps} = {
   password: {
     label: 'Старый пароль',
     id: 'password',
@@ -313,11 +315,11 @@ export const CHANGEPASSWORD_FORM = {
     hasError: false,
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const valid = input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -335,12 +337,12 @@ export const CHANGEPASSWORD_FORM = {
     hasError: false,
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^(?=.*[A-Z].*){1,}(?=.*\d.*){1,}.{8,40}$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -358,12 +360,12 @@ export const CHANGEPASSWORD_FORM = {
     hasError: false,
     events:{
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^(?=.*[A-Z].*){1,}(?=.*\d.*){1,}.{8,40}$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -380,7 +382,7 @@ export const CHANGEPASSWORD_FORM = {
         e.preventDefault();
         e.stopPropagation();
 
-        //@ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const formEl = e.target?.form;
         const formElements = formEl.querySelectorAll('input');
         let valid = true;
@@ -401,7 +403,7 @@ export const CHANGEPASSWORD_FORM = {
   }
 }
 
-export const CHANGEUSERDATA_FORM = {
+export const CHANGEUSERDATA_FORM: {[key: string]: ComponentProps} = {
   email: {
     label: 'Почта',
     id: 'email',
@@ -413,12 +415,12 @@ export const CHANGEUSERDATA_FORM = {
     validationMessage: 'Не валидная почта',
     events: {
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -437,12 +439,12 @@ export const CHANGEUSERDATA_FORM = {
     validationMessage: 'Не валидный логин',
     events: {
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^(?=.*[a-zA-Z])[-\w]{3,20}$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -461,12 +463,12 @@ export const CHANGEUSERDATA_FORM = {
     validationMessage: 'Не валидное имя',
     events: {
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^[A-ZА-Я][a-zA-Zа-яА-Я]*$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -485,12 +487,12 @@ export const CHANGEUSERDATA_FORM = {
     validationMessage: 'Не валидная фамилия',
     events: {
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^[A-ZА-Я][a-zA-Zа-яА-Я]*$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -510,12 +512,12 @@ export const CHANGEUSERDATA_FORM = {
       'допустимы дефис и нижнее подчёркивание',
     events: {
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^(?=.*[a-zA-Z])[-\w]{3,20}$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -534,12 +536,12 @@ export const CHANGEUSERDATA_FORM = {
     validationMessage: 'Не корректный номер',
     events: {
       blur: function () {
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const input: HTMLInputElement = this.getContent() as HTMLInputElement;
         const regex: RegExp = /^\+?\d{1,4}[-.\s]?(\(\d{1,5}\)|\d{1,5})[-.\s]?\d{1,5}[-.\s]?\d{1,5}[-.\s]?\d{1,5}[-.\s]?\d{1,5}$/;
         const valid = regex.test(input.value) || input.value.length > 0
 
-        // @ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         this.setProps({
           value: input.value,
           hasError: !valid,
@@ -556,7 +558,7 @@ export const CHANGEUSERDATA_FORM = {
         e.preventDefault();
         e.stopPropagation();
 
-        //@ts-ignore
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
         const formEl = e.target?.form;
         const formElements = formEl.querySelectorAll('input');
         let valid = true;

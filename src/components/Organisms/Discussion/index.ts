@@ -3,6 +3,7 @@ import Avatar from "../Avatar";
 import Message from "../../Molecules/Message";
 import discussionService from "../../../mock/discussion.ts";
 import Input from "../../Atomics/Input";
+import {ComponentProps} from "../../../core/types.ts";
 
 export default function(props = {}) {
   const CURRENT_USER_ID = 6543213;
@@ -31,7 +32,7 @@ export default function(props = {}) {
     console.log(e.detail);
     const discussion = getDiscussion(e.detail.chatId);
     if (discussion) {
-      const messages = discussion.messages.map((messageProps:any ) =>
+      const messages = discussion.messages.map((messageProps:ComponentProps ) =>
         Message({
           ...messageProps,
           isMyMessage : CURRENT_USER_ID === messageProps.user

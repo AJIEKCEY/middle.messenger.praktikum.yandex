@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 type Callback<Args extends unknown[] = unknown[], ReturnType = void> = (...args: Args) => ReturnType;
 
 interface Listeners {

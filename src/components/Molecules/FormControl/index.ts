@@ -7,7 +7,7 @@ export default (props:ComponentProps = {}) => {
 
   let formElement;
 
-  if (props.hasOwnProperty('tag')){
+  if (Object.hasOwn(props,'tag')){
     if (props.tag === 'input'){
       formElement = Input({...props})
     } else if (props.tag === 'button'){

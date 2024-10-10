@@ -2,7 +2,7 @@ import Component from './Component/component.ts';
 
 declare global {
   interface Window {
-    app:any;
+    app:unknown;
   }
 }
 
@@ -19,10 +19,10 @@ export interface ComponentProps {
   [key: string]: unknown
 }
 
-export interface ButtonProps {
-  text?: string;
-  class?: string;
-  onClick?: (e: Event) => void;
-}
+// export interface ButtonProps {
+//   text?: string;
+//   class?: string;
+//   onClick?: (e: Event) => void;
+// }
 
 export type ChildComponents = Component[];

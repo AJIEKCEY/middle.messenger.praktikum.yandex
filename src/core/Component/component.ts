@@ -38,29 +38,6 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     this._eventBus().emit(Component.EVENTS.INIT);
   }
 
-  // private _getChildren(propsAndChildren: ComponentProps) : {
-  //   children: Record<string, Component>,
-  //   props: ComponentProps,
-  //   lists: Record<string, any[]>
-  // } {
-  //   const children: Record<string, Component> = {};
-  //   const props: ComponentProps = {};
-  //   const lists: Record<string, any[]> = {};
-  //
-  //   Object.entries(propsAndChildren).forEach( ([key, value]) => {
-  //     if (value instanceof Component) {
-  //       children[key] = value;
-  //     } else if (Array.isArray(value)) {
-  //       lists[key] = value;
-  //     } else {
-  //       props[key] = value;
-  //     }
-  //   });
-  //
-  //   return {children, props, lists}
-  // }
-
-
   private _registerEvents(eventBus: EventBus) : void {
     eventBus.on(Component.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -105,7 +82,8 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     this._eventBus().emit(Component.EVENTS.FLOW_CDM);
   }
 
-  componentDidUpdate(_prevProps?: ComponentProps | unknown, _nextProps?: ComponentProps | unknown) { }
+
+  componentDidUpdate(_prevProps?: ComponentProps | unknown, _nextProps?: ComponentProps | unknown) {}
 
   private _componentDidUpdate(prevProps: ComponentProps | unknown, nextProps: ComponentProps | unknown):void {
     this.componentDidUpdate(prevProps, nextProps);
@@ -163,43 +141,17 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
   }
 
   private _addEvents(): void {
-    //const events: {[key: string]: any} = {}
-    const { events = {} } = this._props;
+    const { events }: {[key: string]: any} = this._props;
+
     if (events){
       Object.keys(events).forEach(eventName => {
         if (this._element) {
-          // @ts-ignore
+
           this._element.addEventListener(eventName, events[eventName]);
         }
       });
     }
   }
-
-  // private _addEvents():void {
-  //   const nodes: NodeList | undefined = this._element?.querySelectorAll('[events]');
-  //
-  //   if (nodes instanceof NodeList) {
-  //     [...Array.from(nodes), this._element].forEach((item: Node | null):void => {
-  //       const eventsString: string = (item as HTMLElement).getAttribute('events') as string;
-  //
-  //       const eventsObject: {[key: string]: string} = JSON.parse(eventsString
-  //         ? eventsString?.replaceAll('\'', '"') : '{}');
-  //       const eventsKeys: string[] = Object.keys(eventsObject);
-  //
-  //       if (eventsKeys.length > 0) {
-  //         eventsKeys.forEach((eventName: string): void => {
-  //           const handlerName: string = eventsObject[eventName];
-  //
-  //           if (this._methods instanceof Object) {
-  //             (item as HTMLElement).addEventListener(eventName, this._methods[handlerName]);
-  //           }
-  //         });
-  //       }
-  //
-  //       (item as HTMLElement).removeAttribute('events');
-  //     });
-  //   }
-  // }
 
   public compile(template: string, props: ComponentProps):void {
     if (this._element instanceof HTMLElement) {
@@ -221,7 +173,7 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
             this._element.setAttribute('data-id', this._id);
           }
 
-          for ( let childName in this._children){
+          for ( const childName in this._children){
             const child = this._children[childName]
             const stub = this._element?.querySelector(`[data-id="${child._id}"]`);
 

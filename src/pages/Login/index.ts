@@ -9,8 +9,7 @@ export default (prop = {}) => {
 
   const controls = [];
 
-  for (let field in AUTHORIZATION_FORM){
-    // @ts-ignore
+  for (const field in AUTHORIZATION_FORM){
     controls.push(FormControl({...AUTHORIZATION_FORM[field] }));
   }
 
