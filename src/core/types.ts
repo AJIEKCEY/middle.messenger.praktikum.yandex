@@ -2,7 +2,7 @@ import Component from './Component/component.ts';
 
 declare global {
   interface Window {
-    app:unknown;
+    app:Component;
   }
 }
 

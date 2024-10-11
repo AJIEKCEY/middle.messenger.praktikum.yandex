@@ -1,6 +1,7 @@
 import App from './App.ts'
 import Messenger from "../pages/Messenger";
 //import Login from "../pages/Login";
+import {} from "../core/types.ts"
 
 export default (props = {}) => {
 
