@@ -1,4 +1,4 @@
-.validationMessage{
+.validationMessage {
   color: var(--color-red) !important;
   font-size: 0.8em;
   position: relative;
@@ -6,20 +6,18 @@
   top: -20px;
 }
 
-.form-control input + .validationMessage{
+.form-control input + .validationMessage {
   display: none;
 }
 
-.form-control input.warning + .validationMessage{
+.form-control input.warning + .validationMessage {
   display: block;
 }
 
-.form-control label:has(+input){
+.form-control label:has(+input) {
   color: var(--color-gray);
 }
 
-.form-control label:has(+input.warning){
+.form-control label:has(+input.warning) {
   color: var(--color-red);
 }
-
-

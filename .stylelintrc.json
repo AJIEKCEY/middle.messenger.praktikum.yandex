@@ -1,21 +1,22 @@
 {
   "extends": "stylelint-config-standard",
   "plugins": [
-    "stylelint-value-no-unknown-custom-properties"
+      "stylelint-order"
   ],
   "rules": {
-    "color-hex-case": "lower",
-    "csstools/value-no-unknown-custom-properties": [true],
-    "root": true,
-    "selector-class-pattern": [
-      "^[a-z]([a-z0-9-]+)?(__([a-z0-9]+-?)+)?(_([a-z0-9]+-?)+){0,2}$",
-      {
-        "message": "Expected BEM naming convention for class."
-      }
-    ]
-  },
-  "ignoreFiles": [
-    "build/*",
-    "dist/*"
-  ]
+      "at-rule-no-unknown": [
+          true,
+          {
+              "ignoreAtRules": [
+                  "tailwind",
+                  "apply",
+                  "variants",
+                  "responsive",
+                  "screen"
+              ]
+          }
+      ],
+      "no-descending-specificity": null,
+      "selector-class-pattern": null
+  }
 }

@@ -1,4 +1,4 @@
-.entryform__wrapper{
+.entryform__wrapper {
   position: absolute;
   width: 100%;
   top: 0;
@@ -10,30 +10,30 @@
   justify-content: center;
 }
 
-.entryform__item{
+.entryform__item {
   width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 0 6px var(--color-black) ;
+  box-shadow: 0 0 6px var(--color-black);
 }
 
-.entryform__item input{
+.entryform__item input {
   border-bottom: var(--color-blue) solid 1px;
   margin-bottom: 30px;
   padding-bottom: 5px;
   width: 100%;
 }
 
-.entryform__item label{
+.entryform__item label {
   color: var(--color-gray);
   font-size: 0.8em;
   align-self: start;
 }
 
-.entryform__item button{
+.entryform__item button {
   width: 100%;
   padding: 12px 20px;
   margin: 20px 0;

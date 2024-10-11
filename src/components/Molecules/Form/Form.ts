@@ -1,4 +1,3 @@
-import "./form.css"
 import Component from "../../../core/Component/component.ts";
 import template from "./form.tpl.ts";
 

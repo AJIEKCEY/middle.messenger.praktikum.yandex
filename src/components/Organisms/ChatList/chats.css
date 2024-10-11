@@ -1,15 +1,15 @@
-.chats__item{
-    width: inherit;
+.chats__item {
+  width: inherit;
 }
 
-.search__item{
-    display: flex;
-    align-items: center;
-    justify-content: stretch;
+.search__item {
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
 }
 
-.search__input{
-    position: relative;
-    margin: 10px 20px;
-    width: 100%;
+.search__input {
+  position: relative;
+  margin: 10px 20px;
+  width: 100%;
 }
