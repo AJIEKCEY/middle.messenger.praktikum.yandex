@@ -6,11 +6,11 @@
   top: -20px;
 }
 
-.form-control input + .validationMessage {
+.form-control:has( input ) .validationMessage {
   display: none;
 }
 
-.form-control input.warning + .validationMessage {
+.form-control:has(input.warning) .validationMessage {
   display: block;
 }
 

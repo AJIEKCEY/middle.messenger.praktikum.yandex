@@ -19,16 +19,28 @@
   min-width: 50%;
 }
 
-.profile__data .form-control,
+.profile__data .form-control > div,
 .profile__data p {
   display: flex;
   justify-content: space-between;
-  padding: 2px 0;
+}
+
+.profile__data .form-control input {
+  background-color: #edf1ff;
+  width: 40%;
+  min-width: 100px;
+  padding: 0 10px;
+}
+
+.profile__data .form-control .validationMessage {
+  position: inherit;
+  padding-bottom: 10px;
+  text-align: end;
 }
 
 .profile__data p span,
 .profile__data input {
-  color: var(--color-gray);
+  color: var(--color-gray-153);
 }
 
 .profile__data input {
@@ -41,6 +53,7 @@
 }
 
 .profile__data form .form-control:last-child {
+  display: flex;
   justify-content: center;
 }
 
