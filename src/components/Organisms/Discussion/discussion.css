@@ -1,0 +1,49 @@
+.discussion__wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.discussion__messages {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 20px;
+  height: 100%;
+}
+
+.discussion__header {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 15px;
+  margin-left: 20px;
+  border-bottom: 1px solid var(--color-gray-239);
+}
+
+.discussion__header h2 {
+  margin-left: 15px;
+}
+
+.header__menu {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+
+.header__menu:hover {
+  font-size: 1.5em;
+}
+
+.discussion__input {
+  padding: 20px;
+  display: flex;
+  flex-basis: 0;
+}
+
+.discussion__input input {
+  margin: 0 15px;
+  border-radius: 20px;
+  padding: 7px 10px;
+  outline: var(--color-gray-242);
+  background-color: var(--color-gray-239);
+  flex-grow: 1;
+}

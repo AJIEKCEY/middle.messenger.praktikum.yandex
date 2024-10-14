@@ -1,0 +1,26 @@
+.message__item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 15px 0;
+  max-width: 70%;
+  line-height: 1.4;
+}
+
+.message__item_right {
+  background-color: var(--color-light-blue);
+  border-radius: 15px 15px 0;
+  align-self: end;
+}
+
+.message__item_left {
+  background-color: var(--color-gray-250);
+  border-radius: 15px 15px 15px 0;
+  align-self: start;
+}
+
+.message_time {
+  align-self: end;
+  font-size: 0.9em;
+  color: var(--color-gray-153);
+}
