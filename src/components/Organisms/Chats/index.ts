@@ -2,18 +2,18 @@ import Chats from "./Chats.ts";
 import Button from "../../Atomics/Button";
 import SearchBar from "../../Molecules/SearchBar";
 import ChatList from "../../Organisms/ChatList";
-import Settings from "../../../pages/Settings";
+import Router from "../../../core/Router.ts";
+
+const router = new Router();
 
 export default function(props = {}) {
-
-  const settingsPage = Settings()
 
   const settingsButton = Button({
     events: {
       click: (e: Event) => {
         e.preventDefault();
         e.stopPropagation();
-        window.app.setProps({currentPage : settingsPage})
+        router.go("/Settings")
       },
     },
     attr: {

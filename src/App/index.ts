@@ -1,20 +1,27 @@
+import Router from "../core/Router.ts";
 import App from './App.ts'
-import Messenger from "../pages/Messenger";
-//import Login from "../pages/Login";
-import {} from "../core/types.ts"
+import HTTPTransport from "../core/api.ts";
 
-export default (props = {}) => {
+const router = new Router()
 
-  const messengerPage = Messenger();
-  //const logIn = Login();
+const httpTransport = new HTTPTransport();
+const host = 'https://ya-praktikum.tech/api/v2/auth/user';
 
-  const app =  new App({
-    ...props,
-    //currentPage : logIn,
-    currentPage : messengerPage,
-  })
-
-  window.app = app;
-
-  return app
+const options = {
+  method: 'GET',
+  headers: {
+    'content-type': 'application/json', // Данные отправляем в формате JSON
+  },
 }
+
+ httpTransport.get(host, options)
+   .then( XHRResponse => {
+     console.error(XHRResponse.responseText)
+     if (XHRResponse.status === 200){
+       router.go('/Messenger');
+     } else {
+       router.go('/Login');
+     }
+   })
+
+export default new App({})

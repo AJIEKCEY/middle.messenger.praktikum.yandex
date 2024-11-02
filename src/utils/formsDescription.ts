@@ -1,4 +1,4 @@
-import serialize from "./baseUtil.ts";
+import { serialize } from "./baseUtil.ts";
 import {ComponentProps} from "../core/types.ts";
 import {VALIDATION_MESSAGES, VALIDATION_RULES} from "./validation.ts";
 
@@ -216,29 +216,7 @@ export const REGISTRATION_FORM: { [key: string]: ComponentProps } = {
     text: 'Зарегистрироваться',
     id: 'login__btn',
     tag: 'button',
-    events: {
-      click: function (e: Event) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
-        const formEl = e.target?.form;
-        const formElements = formEl.querySelectorAll('input');
-        let valid = true;
-        formElements.forEach((element: HTMLInputElement) => {
-          if (element.value.length === 0)
-            element.classList.add('warning');
-          if (element.classList.contains('warning')) {
-            valid = false
-          }
-        })
-
-        if (valid) {
-          const formData = new FormData(formEl)
-          console.log(serialize(formData));
-        }
-      }
-    }
+    events: {}
   }
 }
 
@@ -294,29 +272,7 @@ export const AUTHORIZATION_FORM: {[key: string]: ComponentProps} = {
     text: 'Войти',
     id: 'login__btn',
     tag: 'button',
-    events: {
-      click: function (e: Event) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        //@ts-expect-error     this будет связываться (bind) с контекстом компонента
-        const formEl = e.target?.form;
-        const formElements = formEl.querySelectorAll('input');
-        let valid = true;
-        formElements.forEach((element: HTMLInputElement) => {
-          if (element.value.length === 0)
-            element.classList.add('warning');
-          if (element.classList.contains('warning')) {
-            valid = false
-          }
-        })
-
-        if (valid) {
-          const formData = new FormData(formEl)
-          console.log(serialize(formData));
-        }
-      }
-    }
+    events: {}
   }
 }
 

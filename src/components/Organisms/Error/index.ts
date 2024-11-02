@@ -1,7 +1,8 @@
 import Error from "./Error.ts"
 import Link from "../../Atomics/Link";
-import Settings from "../../../pages/Settings"
+import Router from "../../../core/Router.ts";
 
+const router = new Router()
 
 export default (prop = {}) => {
   return new Error({
@@ -12,7 +13,7 @@ export default (prop = {}) => {
       events: {
         click: (e:Event) => {
           e.stopPropagation();
-          window.app.setProps({currentPage: Settings()})
+          router.back();
         },
       }
     })
