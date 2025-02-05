@@ -1,12 +1,15 @@
 import Handlebars from "handlebars";
 import {v4 as makeUUID} from "uuid"
 import EventBus from "../EventBus.ts";
+//@ts-ignore
+import Store from "../Store/index.js"
 import {
   ComponentProps, Methods, ChildComponents, ComponentDataType,
 } from '../types.ts';
 import PropsManager from '../PropsManager.ts';
 
 export default class Component <ComponentData extends ComponentDataType = {}> {
+  // события жизненного цикла компонента
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -14,12 +17,14 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     FLOW_RENDER: "flow:render"
   };
 
+
   protected _id: string;
   protected _element: HTMLElement | null = null;
   protected _props: ComponentProps;
   protected _children: ChildComponents;
   protected _methods: Methods;
   protected _eventBus;
+  protected _store;
 
   //protected _setUpdate = false;
 
@@ -33,11 +38,13 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     this._children = componentDescriptor._children;
     this._methods = componentDescriptor._methods;
 
+    this._store = Store;
     this._eventBus = () => eventBus;
     this._registerEvents(eventBus);
     this._eventBus().emit(Component.EVENTS.INIT);
   }
 
+  //подписываемся на события жизненного цикла
   private _registerEvents(eventBus: EventBus) : void {
     eventBus.on(Component.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -45,9 +52,13 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     eventBus.on(Component.EVENTS.FLOW_RENDER, this.render.bind(this));
   }
 
+  //проксируем свойства компонента
   private _makePropsProxy(baseProps: ComponentProps): ComponentProps {
     return new Proxy(baseProps, {
-      get: (target: ComponentProps, property: string): unknown => target[property],
+      get: (target: ComponentProps, property: string): unknown => {
+        const value = target[property];
+        return typeof value === "function" ? value.bind(target) : value;
+      },
       set: (target: ComponentProps, property: string, value: unknown): boolean => {
         target[property] = value;
 
@@ -55,6 +66,7 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
 
         return true;
       },
+
       deleteProperty: (_target: ComponentProps, property: string): boolean => {
         throw new Error(`Нельзя удалить свойство ${property}`);
       },
@@ -66,33 +78,52 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     this._element.setAttribute('data-id', this._id);
   }
 
+  //инициализируем компонент
   protected init(): void {
     this._createResources();
     this._eventBus().emit(Component.EVENTS.FLOW_RENDER);
   }
 
-  componentDidMount():void {}
-
+  // обработчики событий жизненного цикла
+  //did mount
   private _componentDidMount():void {
     this.componentDidMount();
     console.log('Component did mount: ', this.constructor.name);
   }
 
+  componentDidMount():void {}
+
   dispatchComponentDidMount():void {
     this._eventBus().emit(Component.EVENTS.FLOW_CDM);
   }
 
-
-  componentDidUpdate(_prevProps?: ComponentProps | unknown, _nextProps?: ComponentProps | unknown) {}
-
+  // did update
   private _componentDidUpdate(prevProps: ComponentProps | unknown, nextProps: ComponentProps | unknown):void {
     this.componentDidUpdate(prevProps, nextProps);
+    console.log('Component did update: ', this.constructor.name);
   }
+
+  componentDidUpdate(_prevProps?: ComponentProps | unknown, _nextProps?: ComponentProps | unknown) {}
 
   dispatchComponentDidUpdate(prevProps: ComponentProps, nextProps: ComponentProps):void {
     this._eventBus().emit(Component.EVENTS.FLOW_CDU, prevProps, nextProps);
   }
 
+  // добавляем подписки на события при удалении компонента
+  private _addEvents(): void {
+    const { events }: {[key: string]: any} = this._props;
+
+    if (events){
+      Object.keys(events).forEach(eventName => {
+        if (this._element) {
+
+          this._element.addEventListener(eventName, events[eventName]);
+        }
+      });
+    }
+  }
+
+  // удаляем подписки на события при удалении компонента
   private _removeEvents():void {
     const nodes: NodeList | undefined = this._element?.querySelectorAll('[events]');
 
@@ -119,6 +150,7 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     }
   }
 
+  // TODO В чем отличия следующих 2 методов?
   protected addAttributes(): void {
     const { attr = {} } = this._props;
     if (attr){
@@ -140,19 +172,7 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     }
   }
 
-  private _addEvents(): void {
-    const { events }: {[key: string]: any} = this._props;
-
-    if (events){
-      Object.keys(events).forEach(eventName => {
-        if (this._element) {
-
-          this._element.addEventListener(eventName, events[eventName]);
-        }
-      });
-    }
-  }
-
+  // компилируем шаблон
   public compile(template: string, props: ComponentProps):void {
     if (this._element instanceof HTMLElement) {
       const templateNode:HTMLTemplateElement = document.createElement('template');
@@ -187,10 +207,12 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     }
   }
 
+  //рендерим шаблон
   render():void {
     if (this._element instanceof HTMLElement) this._element.innerHTML = '';
   }
 
+  //устанавливаем св-ва компонента.
   public setProps = (nextProps: ComponentProps):void => {
     if (!nextProps) {
       return;
@@ -205,15 +227,17 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     this.dispatchComponentDidUpdate(prevProps, this._props);
   };
 
-  public getId(): string{
-      return this._id ? this._id : ''
-  }
 
+  //TODO Зачем эти методы?
   public getContent(): HTMLElement {
     if (!this._element) {
       throw new Error('Element is not created');
     }
     return this._element as HTMLElement;
+  }
+
+  public getId(): string{
+      return this._id ? this._id : ''
   }
 
   public show() {

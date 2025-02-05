@@ -70,7 +70,7 @@ export default class HTTPTransport {
   private _setHeaders (xhr: XMLHttpRequest, headers: HttpHeaders | undefined): void {
 
     if (!headers){
-      xhr.setRequestHeader('Content-Type','text/plain');
+      xhr.setRequestHeader('content-type', 'application/json');
       return
     }
 

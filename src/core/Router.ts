@@ -1,4 +1,10 @@
 import Component from "./Component/component.ts";
+//@ts-ignore
+import Store from "./Store/index.js";
+
+interface ComponentC {
+  new (props: Record<string, unknown>): Component<Record<string, unknown>>;
+}
 
 const isEqual = (pathname:string, currPathname:string) => {
   return pathname === currPathname;
@@ -7,18 +13,20 @@ const isEqual = (pathname:string, currPathname:string) => {
 class Route {
 
   protected _pathname: string;
-  protected _block: Component;
+  protected _block: ComponentC;
+  public isPublicRoot: Boolean;
 
-  constructor(pathname: string, block: Component) {
+  constructor(pathname: string, block: ComponentC, isPublicRoot: boolean) {
     this._pathname = pathname;
     this._block = block;
+    this.isPublicRoot = isPublicRoot
   }
 
   get(pathname: string) {
     if (this.match(pathname)) {
       this._pathname = pathname;
       if (this._block){
-        return this._block
+        return new this._block({})
       }
     }
     return null
@@ -51,8 +59,8 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: Component) {
-    const route = new Route(pathname, block);
+  use(pathname: string, block: ComponentC, isPublicRoot = false) {
+    const route = new Route(pathname, block, isPublicRoot);
 
     this.routes?.push(route);
 

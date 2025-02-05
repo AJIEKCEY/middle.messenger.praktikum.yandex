@@ -5,7 +5,7 @@ interface Listeners {
 }
 
 export default class EventBus {
-  private _listeners: Listeners;
+  protected readonly _listeners: Listeners;
 
   constructor() {
     this._listeners = {};
@@ -31,11 +31,11 @@ export default class EventBus {
 
   emit(event: string, ...args: unknown[]): void {
     if (!this._listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      console.error(`Нет события: ${event}`);
+    } else {
+      this._listeners[event].forEach((listener) => {
+        listener(...args);
+      });
     }
-
-    this._listeners[event].forEach((listener) => {
-      listener(...args);
-    });
   }
 }
