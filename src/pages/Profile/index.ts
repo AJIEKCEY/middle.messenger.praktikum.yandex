@@ -70,7 +70,7 @@ const goToSettingsLink = Link({
   events: {
     click: (e:Event) => {
       e.stopPropagation();
-      router.go("/Settings");
+      router.go("/settings");
     },
   }
 })

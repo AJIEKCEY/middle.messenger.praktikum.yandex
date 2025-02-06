@@ -17,12 +17,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const router = new Router();
 
   router
-    .use("/Messenger", Messenger)
-    .use("/Login", Login )
-    .use("/Registration", Registration)
-    //.use("/Profile", Profile)
-    .use("/Settings", Settings)
-    .use("/Error", Error)
+    .use("/messenger", Messenger)
+    .use("/sign-in", Login )
+    .use("/sign-up", Registration)
+    //.use("/profile", Profile)
+    .use("/settings", Settings)
+    .use("/error", Error)
     .start(app)
 
   const targetEl = document.querySelector('#app');

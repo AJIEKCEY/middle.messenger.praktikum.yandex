@@ -21,7 +21,7 @@ export default class App extends Component{
 
     const userId = JSON.parse(response.responseText)?.id;
     Store.dispatch('setUserId', userId)
-    router.go('/Messenger');
+    router.go('/messenger');
 
 
     return new App()

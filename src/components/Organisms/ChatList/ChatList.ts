@@ -40,7 +40,7 @@ export default class ChatList extends Component{
           })
           this.setProps({chats})
         } else if (XHRResponse.status === 401){
-          router.go('/Login');
+          router.go('/sign-in');
         } else {
           console.error(XHRResponse.responseText)
         }

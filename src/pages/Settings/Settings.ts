@@ -16,7 +16,7 @@ const page404 = Link({
   events: {
     click: (e:Event) => {
       e.preventDefault();
-      router.go("/Error?kod=404&message=Не туда попали");
+      router.go("/error?kod=404&message=Не туда попали");
     },
   },
 })
@@ -29,7 +29,7 @@ const page500 = Link({
   events: {
     click: (e:Event) => {
       e.preventDefault();
-      router.go("/Error?kod=500&message=Мы уже исправляем");
+      router.go("/error?kod=500&message=Мы уже исправляем");
     },
   },
 })
@@ -42,7 +42,7 @@ const profile = Link({
   events: {
     click: (e:Event) => {
       e.preventDefault();
-      router.go("/Profile");
+      router.go("/profile");
     },
   },
 })
@@ -55,7 +55,7 @@ const login = Link({
   events: {
     click: (e:Event) => {
       e.preventDefault();
-      router.go("/Login")
+      router.go("/sign-in")
     },
   },
 })
@@ -68,7 +68,7 @@ const registration = Link({
   events: {
     click: (e:Event) => {
       e.preventDefault();
-      router.go("/Registration")
+      router.go("/sign-up")
     },
   },
 })
@@ -93,7 +93,7 @@ const logout = Link({
 
       httpTransport.post(host, options)
         .then( () => {
-          router.go("/Login")
+          router.go("/sign-in")
         })
 
     },

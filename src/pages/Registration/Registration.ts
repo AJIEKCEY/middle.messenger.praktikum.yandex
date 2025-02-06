@@ -42,7 +42,7 @@ for (const field in REGISTRATION_FORM){
           registrationApi(data)
             .then( XHRResponse => {
               if (XHRResponse.status === 200){
-                router.go('/Messenger');
+                router.go('/messenger');
               } else {
                 const errorEl = document.querySelector('.error__message');
                 if (errorEl){
@@ -69,7 +69,7 @@ const authorizationLink = Link({
   events: {
     click: (e:Event) => {
       e.stopPropagation();
-      router.go('/Login');
+      router.go('/sign-in');
     },
   }
 })
