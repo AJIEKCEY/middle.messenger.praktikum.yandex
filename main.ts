@@ -1,12 +1,13 @@
-import Router from "./src/core/Router.ts";
+import Router from "./src/core/Router/Router.ts";
 import {} from "./src/core/types.ts"
 import './src/utils/helpers/handlebarsHelpers';
 import Login from "./src/pages/Login/Login";
 import Registration from "./src/pages/Registration/Registration";
 import Messenger from "./src/pages/Messenger/Messenger";
+import Error from "./src/pages/Error/Error";
 //import Profile from "./src/pages/Profile";
 import App from "./src/App/App.ts";
-//import Settings from "./src/pages/Settings";
+import Settings from "./src/pages/Settings/Settings";
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -20,7 +21,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     .use("/Login", Login )
     .use("/Registration", Registration)
     //.use("/Profile", Profile)
-    //.use("/Settings", Settings)
+    .use("/Settings", Settings)
+    .use("/Error", Error)
     .start(app)
 
   const targetEl = document.querySelector('#app');

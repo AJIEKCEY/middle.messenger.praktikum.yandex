@@ -5,7 +5,7 @@ import Form from "../../components/Molecules/Form";
 import Avatar from "../../components/Organisms/Avatar";
 import FormControl from "../../components/Molecules/FormControl";
 import {CHANGEPASSWORD_FORM, CHANGEUSERDATA_FORM} from "../../utils/formsDescription.ts";
-import Router from "../../core/Router.ts";
+import Router from "../../core/Router/Router.ts";
 
 const router = new Router()
 

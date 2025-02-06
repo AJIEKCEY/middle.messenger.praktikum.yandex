@@ -2,7 +2,7 @@ import Component from "../../../core/Component/component.ts";
 import template from "./chats.tpl.ts"
 
 import "./chats.css"
-import Router from "../../../core/Router.ts";
+import Router from "../../../core/Router/Router.ts";
 //@ts-ignore
 import Store from "../../../core/Store/index.js"
 import {ComponentProps} from "../../../core/types.ts";

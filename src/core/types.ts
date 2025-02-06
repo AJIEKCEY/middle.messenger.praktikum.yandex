@@ -26,3 +26,7 @@ export interface ComponentProps {
 // }
 
 export type ChildComponents = Component[];
+
+export interface ComponentC {
+  new (props: Record<string, unknown>): Component<Record<string, unknown>>;
+}

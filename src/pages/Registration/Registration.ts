@@ -2,7 +2,7 @@ import Component from "../../core/Component/component.ts";
 import template from "./registration.tpl.ts";
 
 import "./registration.css"
-import Router from "../../core/Router.ts";
+import Router from "../../core/Router/Router.ts";
 import {REGISTRATION_FORM} from "../../utils/formsDescription.ts";
 import {serialize} from "../../utils/baseUtil.ts";
 import registrationApi from "./registrationApi.ts";

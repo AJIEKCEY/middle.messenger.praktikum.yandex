@@ -2,7 +2,7 @@ import Component from "../../../core/Component/component.ts";
 import template from "./chats.tpl.ts"
 
 import "./chats.css"
-import Router from "../../../core/Router.ts";
+import Router from "../../../core/Router/Router.ts";
 import Button from "../../Atomics/Button";
 import SearchBar from "../../Molecules/SearchBar/SearchBar.ts";
 import AddChat from "../../Molecules/AddChat/AddChat";

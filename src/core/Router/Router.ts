@@ -1,41 +1,8 @@
-import Component from "./Component/component.ts";
+import Component from "../Component/component.ts";
+import {ComponentC} from "../types.ts";
+import Route from "./Route.ts";
 //@ts-ignore
-import Store from "./Store/index.js";
-
-interface ComponentC {
-  new (props: Record<string, unknown>): Component<Record<string, unknown>>;
-}
-
-const isEqual = (pathname:string, currPathname:string) => {
-  return pathname === currPathname;
-}
-
-class Route {
-
-  protected _pathname: string;
-  protected _block: ComponentC;
-  public isPublicRoot: Boolean;
-
-  constructor(pathname: string, block: ComponentC, isPublicRoot: boolean) {
-    this._pathname = pathname;
-    this._block = block;
-    this.isPublicRoot = isPublicRoot
-  }
-
-  get(pathname: string) {
-    if (this.match(pathname)) {
-      this._pathname = pathname;
-      if (this._block){
-        return new this._block({})
-      }
-    }
-    return null
-  }
-
-  match(pathname:string) {
-    return isEqual(pathname, this._pathname);
-  }
-}
+import Store from "../Store/index.js";
 
 export default class Router {
 
@@ -81,7 +48,7 @@ export default class Router {
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname:string) {
+  _onRoute(pathname:string, params: string|undefined = undefined) {
     const route = this.getRoute(pathname);
     if (!route) {
       return;
@@ -89,12 +56,13 @@ export default class Router {
 
     this._currentRoute = route;
 
-    (<Component>this._rootComponent).setProps({currentPage: route.get(pathname)});
+    (<Component>this._rootComponent).setProps({currentPage: route.get(pathname, params)});
   }
 
   go(pathname:string) {
-    this.history.pushState({}, '', pathname);
-    this._onRoute(pathname);
+    const {path, params} = this.parsePathName(pathname)
+    this.history.pushState({}, '', path);
+    this._onRoute(path, params);
   }
 
   back() {
@@ -107,5 +75,19 @@ export default class Router {
 
   getRoute(pathname:string) {
     return this.routes?.find(route => route.match(pathname));
+  }
+
+  parsePathName(pathname:string){
+    let path;
+    let params = undefined;
+
+    const searchParamsDivider = pathname.indexOf('?');
+    if (searchParamsDivider > 0){
+      path = pathname.slice(0,searchParamsDivider);
+      params = pathname.slice(searchParamsDivider);
+    } else {
+      path = pathname;
+    }
+    return {path, params}
   }
 }

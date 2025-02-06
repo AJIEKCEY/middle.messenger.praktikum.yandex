@@ -3,7 +3,7 @@ import template from "./login.tpl.ts";
 
 import "./login.css"
 import Link from "../../components/Atomics/Link";
-import Router from "../../core/Router.ts";
+import Router from "../../core/Router/Router.ts";
 import {AUTHORIZATION_FORM} from "../../utils/formsDescription.ts";
 import {serialize} from "../../utils/baseUtil.ts";
 import loginApi from "./loginApi.ts";
