@@ -2,7 +2,7 @@ import Component from "../../core/Component/component.ts";
 import template from "./profile.tpl.ts";
 
 import "./profile.css"
-import profileApi from "./profileApi.ts";
+import ProfileApi from "./profileApi.ts";
 import Link from "../../components/Atomics/Link/Link.ts";
 import {CHANGEPASSWORD_FORM, CHANGEUSERDATA_FORM} from "../../utils/formsDescription.ts";
 import FormControl from "../../components/Molecules/FormControl/FormControl.ts";
@@ -11,135 +11,141 @@ import Input from "../../components/Atomics/Input/Input.ts";
 import Avatar from "../../components/Organisms/Avatar/Avatar.ts";
 
 import Router from "../../core/Router/Router.ts";
-//@ts-ignore
 import Store from "../../core/Store";
 
 const router = new Router()
 
 export default class Profile extends Component{
 
-  protected _userData:{[key:string]:string} = {};
-  protected _profileApi;
+  protected userData:{[key:string]:string} = {};
+  private profileApi: ProfileApi = new ProfileApi();
+  private form = new Form();
 
   constructor() {
     super();
-
-    this._profileApi = new profileApi();
 
     (async () => {
       await this.initProfileComponent();
     }) ();
   }
 
-  async getUser(){
-    return this._profileApi.getUserData()
+  // Fetch user data
+  private async fetchUserData() {
+    return this.profileApi.getUserData();
   }
 
-  async initProfileComponent(){
-    this._userData = await this.getUser()
+  // Initialize profile component state
+  private async initProfileComponent() {
+    this.userData = await this.fetchUserData();
 
     this.setProps({
-      userData: this._userData,
-      currentView : 'view',
-      Avatar: new Avatar({avatar: this._userData?.avatar, attr:{class:'avatar'}}),
-      InputFile: this.inputFile,
+      userData: this.userData,
+      currentView: "view",
+      Avatar: new Avatar({ avatar: this.userData?.avatar, attr: { class: "avatar" } }),
+      AvatarInput: this.avatarInput,
       EditData: this.editDataLink,
       GoBack: this.goToSettingsLink,
       ChangePassword: this.changePasswordLink,
-    })
+    });
 
-    this._store.events.on('userProfile',this.changeUserProfileData.bind(this));
-    this._store.events.on('newPassword',this.changePassword.bind(this));
-  }
-
-  changeUserProfileData(){
-    this._profileApi.sendUserProfile(Store.state.userProfile)
-      .then(() => {
-        this.initProfileComponent();
-      });
-  }
-
-  changePassword(){
-    this._profileApi.sendNewPassword(Store.state.newPassword)
-      .then(() => {
-        this.initProfileComponent();
-      });
-  }
-
-  form = new Form()
-
-  editDataLink = new Link({
-    title: 'Изменить данные',
-    href: 'javascript:void(0);',
-    events: {
-      click: (e:Event) => {
-        e.stopPropagation();
-
-        const controls = [];
-        for (const field in CHANGEUSERDATA_FORM){
-          controls.push(new FormControl({...CHANGEUSERDATA_FORM[field], value: this._userData[field] }));
-        }
-
-        this.form.setProps({controls})
-
-        this.setProps({currentView : 'edit', Form: this.form})
-      },
+    if (Store?.events) {
+        Store.events.on("userProfile", this.updateProfileData.bind(this));
+        Store.events.on("newPassword", this.updatePassword.bind(this));
     }
+
+  }
+
+  // Update user profile data after form submission
+  private updateProfileData() {
+    if (Store?.state?.userProfile){
+      this.profileApi
+        .sendUserProfile(Store?.state?.userProfile)
+        .then(() => this._updateProfileComponentState());
+    }
+
+  }
+
+  // Update user password after form submission
+  private updatePassword() {
+    if (Store?.state?.userProfile) {
+      this.profileApi
+        .sendNewPassword(Store.state.newPassword)
+        .then(() => this._updateProfileComponentState());
+    }
+  }
+
+  private async _updateProfileComponentState() {
+    await this.initProfileComponent();
+  }
+
+  // Reusable method to generate form controls
+  private generateFormControls(formFields: { [key: string]: any }) {
+    return Object.keys(formFields).map(
+      (field) => new FormControl({ ...formFields[field], value: this.userData[field] })
+    );
+  }
+
+  // Event handler for editing user data
+  private onEditDataClick(e: Event) {
+    e.stopPropagation();
+    const controls = this.generateFormControls(CHANGEUSERDATA_FORM);
+    this.form.setProps({ controls });
+    this.setProps({ currentView: "edit", Form: this.form });
+  }
+
+  // Event handler for changing user password
+  private onChangePasswordClick(e: Event) {
+    e.stopPropagation();
+    const controls = this.generateFormControls(CHANGEPASSWORD_FORM);
+    this.form.setProps({ controls });
+    this.setProps({ currentView: "password", Form: this.form });
+  }
+
+  // Links and input elements
+  private editDataLink = new Link({
+    title: "Изменить данные",
+    href: "javascript:void(0);",
+    events: {
+      click: this.onEditDataClick.bind(this),
+    },
   });
 
-  changePasswordLink = new Link({
-    title: 'Изменить пароль',
-    href: 'javascript:void(0);',
+  private changePasswordLink = new Link({
+    title: "Изменить пароль",
+    href: "javascript:void(0);",
     events: {
-      click: (e:Event) => {
-        e.stopPropagation();
-
-        const controls = [];
-        for (const field in CHANGEPASSWORD_FORM){
-          controls.push(new FormControl({...CHANGEPASSWORD_FORM[field] }));
-        }
-
-        this.form.setProps({controls})
-
-        this.setProps({currentView : 'password',Form: this.form})
-      },
-    }
+      click: this.onChangePasswordClick.bind(this),
+    },
   });
 
-  inputFile = new Input({
-    id: 'avatar',
-    type: 'file',
-    name: 'avatar',
+  private avatarInput = new Input({
+    id: "avatar",
+    type: "file",
+    name: "avatar",
     events: {
-      change: (e:Event) => {
+      change: (e: Event) => {
         e.stopPropagation();
         const fileInput = e.target as HTMLInputElement;
         const files = fileInput.files;
-        if(files && files.length > 0){
-          const file = files[0]
-          const formData = new FormData(); // Создаем объект FormData
-          formData.append('avatar', file, file.name);
-          this._profileApi.sendAvatar(formData)
-            .then( () => {
-              this.initProfileComponent();
-            });
+        if (files && files.length > 0) {
+          const formData = new FormData();
+          formData.append("avatar", files[0], files[0].name);
+          this.profileApi.sendAvatar(formData).then(() => this._updateProfileComponentState());
         } else {
-          console.error('File not found');
+          console.error("File not found");
         }
       },
-    }
-  })
+    },
+  });
 
-  goToSettingsLink = new Link({
-    title: 'Назад',
-    href: 'javascript:void(0);',
+  private goToSettingsLink = new Link({
+    title: "Назад",
+    href: "javascript:void(0);",
     events: {
-      click: (e:Event) => {
-        e.stopPropagation();
-        router.back();
-      },
-    }
-  })
+      click: () => router.back(),
+    },
+  });
+
 
   override render(): void {
     this.compile(template, this._props);

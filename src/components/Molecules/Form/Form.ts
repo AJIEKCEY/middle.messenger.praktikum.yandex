@@ -7,7 +7,7 @@ export default class Form extends Component{
     super(data);
   }
 
-  render() {
+  override render(): void {
     this.compile(template, this._props);
   }
 }

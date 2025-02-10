@@ -3,8 +3,7 @@ import template from "./chats.tpl.ts"
 
 import "./chats.css"
 import Router from "../../../core/Router/Router.ts";
-//@ts-ignore
-import Store from "../../../core/Store/index.js"
+import Store from "../../../core/Store"
 import {ComponentProps} from "../../../core/types.ts";
 import Chat from "../../Molecules/Chat/Chat.ts";
 import chatListApi from "./chatListApi.ts";

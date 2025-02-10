@@ -31,7 +31,7 @@ export default class Message extends Component{
 
   }
 
-  render() {
+  override render(): void {
     this.compile(template, this._props);
   }
 }

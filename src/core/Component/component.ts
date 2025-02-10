@@ -1,8 +1,7 @@
 import Handlebars from "handlebars";
 import {v4 as makeUUID} from "uuid"
 import EventBus from "../EventBus.ts";
-//@ts-ignore
-import Store from "../Store/index.js"
+import Store from "../Store"
 import {
   ComponentProps, Methods, ChildComponents, ComponentDataType,
 } from '../types.ts';

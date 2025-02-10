@@ -19,7 +19,6 @@ export default class Socket {
 
   private async getToken():Promise<boolean>{
     const result = await this._httpTransport.post(`${this._hostHTTP}/api/v2/chats/token/${this._chatId}`, {});
-    //@ts-ignore
     this._token = JSON.parse(result.responseText).token;
     return true
   }
@@ -47,8 +46,7 @@ export default class Socket {
     });
 
     this._socket.addEventListener('error', event => {
-      //@ts-ignore
-      console.log('Ошибка', event.message);
+        console.log('Ошибка', (event as ErrorEvent).message);
     });
 
     return this._socket;

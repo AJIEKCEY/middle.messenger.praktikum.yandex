@@ -24,13 +24,13 @@ export default class profileApi extends HTTPTransport{
     })
   }
 
-  async sendUserProfile(data: FormData){
+  async sendUserProfile(data: unknown){
     await this.put(`${baseHost}user/profile`, {
       data: JSON.stringify(data)
     })
   }
 
-  async sendNewPassword(data: FormData){
+  async sendNewPassword(data: unknown){
     await this.put(`${baseHost}user/password`, {
       data: JSON.stringify(data)
     })

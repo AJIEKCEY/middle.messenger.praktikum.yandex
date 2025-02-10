@@ -2,8 +2,7 @@ import Component from "../core/Component/component.ts";
 import template from "./app.tpl.ts"
 
 import HTTPTransport from "../core/api.ts";
-//@ts-ignore
-import Store from "../core/Store/index.js";
+import Store from "../core/Store";
 
 import './app.css';
 

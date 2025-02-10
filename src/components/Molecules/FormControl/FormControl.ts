@@ -24,7 +24,7 @@ export default class FormControl extends Component{
     });
   }
 
-  render() {
+  override render(): void {
     this.compile(template, this._props);
   }
 }

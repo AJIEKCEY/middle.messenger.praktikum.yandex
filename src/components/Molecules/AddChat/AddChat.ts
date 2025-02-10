@@ -16,8 +16,8 @@ const addChatButton = new Button({
   events: {
     click: (e: Event) => {
       e.preventDefault();
-      //@ts-ignore
-      const chatName = e.target?.form.querySelector('.chats_add__input').value;
+      const chatName = (e.target as HTMLElement)?.closest('form')?.querySelector<HTMLInputElement>('.chats_add__input')?.value;
+      if (!chatName) return
       addChatApi(chatName)
         .then(XHRResponse => {
           console.log(XHRResponse.responseText)
@@ -31,7 +31,6 @@ const addChatButton = new Button({
     class: 'chats_add__btn',
   },
 });
-
 
 export default class AddChat extends Component{
   constructor() {

@@ -2,8 +2,6 @@ import Component from "../../core/Component/component.ts";
 import template from "./messenger.tpl.ts"
 import Discussion from "../../components/Organisms/Discussion/Discussion.ts";
 import Chats from '../../components/Organisms/Chats/Chats.ts';
-//@ts-ignore
-import Store from "../../core/Store/index.js";
 
 import './messenger.css'
 

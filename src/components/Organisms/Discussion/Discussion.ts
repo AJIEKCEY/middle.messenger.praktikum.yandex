@@ -8,6 +8,7 @@ import Avatar from "../Avatar/Avatar.ts";
 import Socket from "../../../core/Socket.ts";
 import Conversation from "../Conversation/Conversation.ts";
 import Button from "../../Atomics/Button/Button.ts";
+import {ComponentProps} from "../../../core/types.ts";
 
 interface MessageT {
   chat_id: number,
@@ -27,8 +28,8 @@ export default class Discussion extends Component{
   protected _chatId: number = 0;
   protected _Conversation!:Conversation;
 
-  constructor(){
-    super()
+  constructor(data?:ComponentProps){
+    super(data)
 
     this._store.events.on('chatId',this.updateComponent.bind(this));
     this._socket = new Socket();
@@ -122,7 +123,7 @@ export default class Discussion extends Component{
     });
   }
 
-  render(){
+  override render(): void{
     this.compile(template, this._props);
   }
 }

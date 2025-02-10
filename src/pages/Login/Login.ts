@@ -23,8 +23,8 @@ for (const field in AUTHORIZATION_FORM){
         e.preventDefault();
         e.stopPropagation();
 
-        // @ts-ignore
-        const formEl = e.target?.form;
+        const formEl = (e.target as HTMLInputElement)?.form;
+        if (!formEl) throw new Error('Form element dose not found')
         const formElements = formEl.querySelectorAll('input');
         let valid = true;
         formElements.forEach((element: HTMLInputElement) => {

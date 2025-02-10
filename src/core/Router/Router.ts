@@ -1,8 +1,7 @@
 import Component from "../Component/component.ts";
 import {ComponentC} from "../types.ts";
 import Route from "./Route.ts";
-//@ts-ignore
-import Store from "../Store/index.js";
+
 
 export default class Router {
 

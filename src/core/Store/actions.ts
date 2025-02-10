@@ -1,21 +1,23 @@
+import Store from './store'
+
 export default {
-  setUserId(context, payload) {
+  setUserId(context:Store, payload:any) {
     context.commit('setUserId', payload);
   },
 
-  setChatId(context, payload) {
+  setChatId(context:Store, payload:any) {
     context.commit('setChatId', payload);
   },
 
-  setChatName(context, payload) {
+  setChatName(context:Store, payload:any) {
     context.commit('setChatName', payload);
   },
 
-  setUserProfile(context, payload) {
+  setUserProfile(context:Store, payload:any) {
     context.commit('setUserProfile', payload);
   },
 
-  setNewPassword(context, payload) {
+  setNewPassword(context:Store, payload:any) {
     context.commit('setNewPassword', payload);
   }
 };

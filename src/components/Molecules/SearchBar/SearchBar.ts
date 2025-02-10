@@ -29,7 +29,7 @@ const searchButton = new Button({
   },
 });
 
-class SearchBar extends Component{
+export default class SearchBar extends Component{
   constructor() {
     super({
       SearchInput: searchInput,
@@ -37,9 +37,7 @@ class SearchBar extends Component{
     });
   }
 
-  render() {
+  override render(): void {
     this.compile(template, this._props);
   }
 }
-
-export default SearchBar

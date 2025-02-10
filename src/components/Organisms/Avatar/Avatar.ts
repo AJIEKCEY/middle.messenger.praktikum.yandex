@@ -8,7 +8,7 @@ export default class Avatar extends Component{
     super(data)
   }
 
-  override render() {
+  override render():void {
     this.compile(template, this._props);
   }
 }
