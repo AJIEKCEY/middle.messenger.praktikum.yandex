@@ -2,13 +2,13 @@ import Component from "../../core/Component/component.ts";
 import template from "./login.tpl.ts";
 
 import "./login.css"
-import Link from "../../components/Atomics/Link";
+import Link from "../../components/Atomics/Link/Link.ts";
 import Router from "../../core/Router/Router.ts";
 import {AUTHORIZATION_FORM} from "../../utils/formsDescription.ts";
 import {serialize} from "../../utils/baseUtil.ts";
 import loginApi from "./loginApi.ts";
-import FormControl from "../../components/Molecules/FormControl";
-import Form from "../../components/Molecules/Form";
+import FormControl from "../../components/Molecules/FormControl/FormControl.ts";
+import Form from "../../components/Molecules/Form/Form.ts";
 
 
 const router = new Router()
@@ -55,14 +55,14 @@ for (const field in AUTHORIZATION_FORM){
       }
     }
   }
-  controls.push(FormControl({...AUTHORIZATION_FORM[field] }));
+  controls.push( new FormControl({...AUTHORIZATION_FORM[field] }));
 }
 
-const logInForm = Form({
+const logInForm = new Form({
   controls
 });
 
-const registrationLink = Link({
+const registrationLink = new Link({
   title: 'Регистрация',
   href: 'javascript:void(0);',
   events: {

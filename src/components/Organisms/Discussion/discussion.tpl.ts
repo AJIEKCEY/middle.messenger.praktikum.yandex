@@ -11,7 +11,7 @@ export default `
   <div class="discussion__input">
     <div class="discussion__input__buttons"></div>
     {{{DiscussionInput}}}
-    <button> > </button>
+    {{{DiscussionSendButton}}}
   </div>
 </div>
 `

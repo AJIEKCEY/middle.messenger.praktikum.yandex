@@ -12,7 +12,7 @@ enum METHOD {
   PUT = 'PUT',
   PATCH = 'PATCH',
   DELETE = 'DELETE'
-};
+}
 
 // Тип Omit принимает два аргумента: первый — тип, второй — строка
 // и удаляет из первого типа ключ, переданный вторым аргументом
@@ -61,6 +61,8 @@ export default class HTTPTransport {
 
       if (method == 'GET' || !data ){
         xhr.send();
+      } else if (method == 'PUT'){
+        xhr.send(data);
       } else {
         xhr.send(JSON.stringify(data));
       }

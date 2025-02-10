@@ -32,6 +32,5 @@ export default `
   <div class="go_back">
   {{{GoBack}}}
   </div>
-
 </div>
 `

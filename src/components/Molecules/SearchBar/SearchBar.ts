@@ -1,10 +1,10 @@
 import "./searchBar.css"
 import Component from "../../../core/Component/component.ts";
 import template from "./searchBar.tpl.ts";
-import Input from "../../Atomics/Input";
-import Button from "../../Atomics/Button";
+import Input from "../../Atomics/Input/Input.ts";
+import Button from "../../Atomics/Button/Button.ts";
 
-const searchInput = Input({
+const searchInput = new Input({
   events: {
     input: (e: Event) => {
       document.dispatchEvent(new CustomEvent(
@@ -17,7 +17,7 @@ const searchInput = Input({
   },
 });
 
-const searchButton = Button({
+const searchButton = new Button({
   events: {
     click: (e: Event) => {
       e.preventDefault();

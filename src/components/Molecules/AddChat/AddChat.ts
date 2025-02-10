@@ -1,17 +1,17 @@
 import "./addChat.css"
 import Component from "../../../core/Component/component.ts";
 import template from "./addChat.tpl.ts";
-import Input from "../../Atomics/Input";
-import Button from "../../Atomics/Button";
+import Input from "../../Atomics/Input/Input.ts";
+import Button from "../../Atomics/Button/Button.ts";
 import addChatApi from "./addChatApi.ts";
 
-const addChatInput = Input({
+const addChatInput = new Input({
   attr: {
     class: 'chats_add__input',
   },
 });
 
-const addChatButton = Button({
+const addChatButton = new Button({
   text: 'Добавить',
   events: {
     click: (e: Event) => {

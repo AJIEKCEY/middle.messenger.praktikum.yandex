@@ -4,11 +4,16 @@
   width: 100%;
 }
 
-.discussion__messages {
+.discussion__messages{
   display: flex;
   flex-direction: column;
   padding: 15px 20px;
   height: 100%;
+}
+
+.conversation{
+  display: flex;
+  flex-direction: column;
 }
 
 .discussion__header {

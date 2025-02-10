@@ -3,14 +3,14 @@ import template from "./chats.tpl.ts"
 
 import "./chats.css"
 import Router from "../../../core/Router/Router.ts";
-import Button from "../../Atomics/Button";
+import Button from "../../Atomics/Button/Button.ts";
 import SearchBar from "../../Molecules/SearchBar/SearchBar.ts";
 import AddChat from "../../Molecules/AddChat/AddChat";
 import ChatList from "../ChatList/ChatList.ts";
 
 const router = new Router();
 
-const settingsButton = Button({
+const settingsButton = new Button({
   events: {
     click: (e: Event) => {
       e.preventDefault();

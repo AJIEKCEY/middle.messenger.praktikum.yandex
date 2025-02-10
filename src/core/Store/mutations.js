@@ -14,8 +14,13 @@ export default {
     return state;
   },
 
-  setIsAuthorised(state, payload) {
-    state.isAuthorised = payload;
+  setUserProfile(state, payload) {
+    state.userProfile = payload;
+    return state;
+  },
+
+  setNewPassword(state, payload) {
+    state.newPassword = payload;
     return state;
   }
 

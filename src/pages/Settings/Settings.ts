@@ -3,14 +3,14 @@ import template from "./settings.tpl.ts";
 
 import "./settings.css"
 import Router from "../../core/Router/Router.ts";
-import Link from "../../components/Atomics/Link";
+import Link from "../../components/Atomics/Link/Link.ts";
 import HTTPTransport from "../../core/api.ts";
 
 const router = new Router()
 
 const links:Component[] = [];
 
-const page404 = Link({
+const page404 = new Link({
   title: 'Ошибка 404',
   href: 'javascript:void(0);',
   events: {
@@ -23,7 +23,7 @@ const page404 = Link({
 
 links.push(page404);
 
-const page500 = Link({
+const page500 = new Link({
   title: 'Ошибка 500',
   href: 'javascript:void(0);',
   events: {
@@ -36,7 +36,7 @@ const page500 = Link({
 
 links.push(page500);
 
-const profile = Link({
+const profile = new Link({
   title: 'Профиль',
   href: 'javascript:void(0);',
   events: {
@@ -49,7 +49,7 @@ const profile = Link({
 
 links.push(profile);
 
-const login = Link({
+const login = new Link({
   title: 'Вход',
   href: 'javascript:void(0);',
   events: {
@@ -62,7 +62,7 @@ const login = Link({
 
 links.push(login);
 
-const registration = Link({
+const registration = new Link({
   title: 'Регистрация',
   href: 'javascript:void(0);',
   events: {
@@ -75,7 +75,7 @@ const registration = Link({
 
 links.push(registration);
 
-const logout = Link({
+const logout = new Link({
   title: 'Выход',
   href: 'javascript:void(0);',
   events: {

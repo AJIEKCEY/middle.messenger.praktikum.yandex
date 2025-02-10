@@ -282,7 +282,7 @@ export const CHANGEPASSWORD_FORM: { [key: string]: ComponentProps } = {
     id: 'password',
     tag: 'input',
     type: 'password',
-    name: 'password',
+    name: 'oldPassword',
     placeholder: 'Введите пароль',
     hasError: false,
     validationMessage: 'Введите пароль',
@@ -305,7 +305,7 @@ export const CHANGEPASSWORD_FORM: { [key: string]: ComponentProps } = {
     id: 'passwordNew1',
     tag: 'input',
     type: 'password',
-    name: 'passwordNew1',
+    name: 'newPassword',
     placeholder: 'Введите пароль',
     hasError: false,
     validationMessage: VALIDATION_MESSAGES.password,
@@ -329,7 +329,7 @@ export const CHANGEPASSWORD_FORM: { [key: string]: ComponentProps } = {
     id: 'passwordNew2',
     tag: 'input',
     type: 'password',
-    name: 'passwordNew2',
+    name: 'newPassword2',
     placeholder: 'Введите пароль еще раз',
     hasError: false,
     validationMessage: VALIDATION_MESSAGES.password_confirm,
@@ -371,7 +371,8 @@ export const CHANGEPASSWORD_FORM: { [key: string]: ComponentProps } = {
 
         if (valid) {
           const formData = new FormData(formEl)
-          console.log(serialize(formData));
+          //@ts-expect-error    this будет связываться (bind) с контекстом компонента
+          this._store.dispatch('setNewPassword', serialize(formData))
         }
       }
     }
@@ -408,7 +409,8 @@ export const CHANGEUSERDATA_FORM: { [key: string]: ComponentProps } = {
 
         if (valid) {
           const formData = new FormData(formEl)
-          console.log(serialize(formData));
+          //@ts-expect-error    this будет связываться (bind) с контекстом компонента
+          this._store.dispatch('setUserProfile', serialize(formData))
         }
       }
     }

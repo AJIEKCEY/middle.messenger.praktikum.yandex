@@ -6,9 +6,9 @@ import Router from "../../core/Router/Router.ts";
 import {REGISTRATION_FORM} from "../../utils/formsDescription.ts";
 import {serialize} from "../../utils/baseUtil.ts";
 import registrationApi from "./registrationApi.ts";
-import FormControl from "../../components/Molecules/FormControl";
-import Form from "../../components/Molecules/Form";
-import Link from "../../components/Atomics/Link";
+import FormControl from "../../components/Molecules/FormControl/FormControl.ts";
+import Form from "../../components/Molecules/Form/Form.ts";
+import Link from "../../components/Atomics/Link/Link.ts";
 
 
 const router = new Router()
@@ -56,14 +56,14 @@ for (const field in REGISTRATION_FORM){
     }
   }
 
-  controls.push(FormControl({...REGISTRATION_FORM[field] }));
+  controls.push(new FormControl({...REGISTRATION_FORM[field] }));
 }
 
-const registrationForm = Form({
+const registrationForm = new Form({
   controls
 });
 
-const authorizationLink = Link({
+const authorizationLink = new Link({
   title: 'Войти',
   href: 'javascript:void(0);',
   events: {

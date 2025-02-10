@@ -6,7 +6,7 @@ import Router from "../../../core/Router/Router.ts";
 //@ts-ignore
 import Store from "../../../core/Store/index.js"
 import {ComponentProps} from "../../../core/types.ts";
-import Chat from "../../Molecules/Chat";
+import Chat from "../../Molecules/Chat/Chat.ts";
 import chatListApi from "./chatListApi.ts";
 
 const router = new Router()
@@ -59,7 +59,7 @@ export default class ChatList extends Component{
     document.querySelector(`li.chat__item[data-chat-id="${chatId}"]`)?.classList.add('chat__item_active');
   }
 
-  getNewChatComponent = (chatProps:ComponentProps) => Chat({
+  getNewChatComponent = (chatProps:ComponentProps) => new Chat({
     ...chatProps,
     events: {
       click : (e: Event) => {
@@ -87,7 +87,7 @@ export default class ChatList extends Component{
         const chatName = chatProps.title
         if (typeof chatName === 'string' && chatName.toLowerCase().includes(substring.toLowerCase())){
           chats.push(this.getNewChatComponent(chatProps)) ;
-        };
+        }
       })
     }
     return chats;

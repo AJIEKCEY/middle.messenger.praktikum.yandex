@@ -2,11 +2,12 @@ import Component from "../../../core/Component/component.ts";
 import template from "./discussion.tpl.ts";
 import "./discussion.css"
 //import {ComponentDataType, ComponentProps} from "../../../core/types.ts";
-import Input from "../../Atomics/Input";
+import Input from "../../Atomics/Input/Input.ts";
 import Message from "../../Molecules/Message/Message.ts";
-import Avatar from "../Avatar";
+import Avatar from "../Avatar/Avatar.ts";
 import Socket from "../../../core/Socket.ts";
 import Conversation from "../Conversation/Conversation.ts";
+import Button from "../../Atomics/Button/Button.ts";
 
 interface MessageT {
   chat_id: number,
@@ -34,15 +35,34 @@ export default class Discussion extends Component{
     document.addEventListener('WSOpen', this.getMessages.bind(this))
   }
 
+  getButtonComponent(){
+    return new Button({
+      id: 'messageSend',
+      text: ' > ',
+      events: {
+        click: () => {
+          const input = document.getElementById('messageInput') as HTMLInputElement
+          const message = input.value.trim()
+          if (message.length > 0) {
+            this._socket.send({
+              content: message,
+              type: 'message',
+            });
+          }
+        }
+      }
+    })
+  }
+
   getInputComponent(){
-    return Input({
+    return new Input({
       id: 'messageInput',
       type: 'text',
       name: 'messageInput',
       events: {
         keyup: (e:KeyboardEvent) => {
           const message = (e.target as HTMLInputElement)?.value.trim()
-          if (e.key === 'Enter') {
+          if (e.key === 'Enter' && message.length > 0) {
             this._socket.send({
                 content: message,
                 type: 'message',
@@ -61,11 +81,12 @@ export default class Discussion extends Component{
   }
 
   updateComponent(){
-    this._Conversation = new Conversation();
+    this._Conversation = new Conversation({attr: {class: 'conversation'}});
     const chatName =  this._store.state.chatName;
     this.setProps({
-      avatar: Avatar(),
+      avatar: new Avatar({attr:{class:'avatar'}}),
       DiscussionInput: this.getInputComponent(),
+      DiscussionSendButton: this.getButtonComponent(),
       chatName: chatName,
       Conversation: this._Conversation
     })
@@ -89,7 +110,7 @@ export default class Discussion extends Component{
       const messagesList = this._messages[this._chatId].map(( message:MessageT ) =>
         new Message({
           ...message,
-          //isMyMessage : CURRENT_USER_ID === messageProps.user
+          isMyMessage : this._userId === message.user_id
         })
       );
 

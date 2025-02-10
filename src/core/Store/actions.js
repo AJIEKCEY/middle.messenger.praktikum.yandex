@@ -11,7 +11,11 @@ export default {
     context.commit('setChatName', payload);
   },
 
-  setIsAuthorised(context, payload) {
-    context.commit('setIsAuthorised', payload);
+  setUserProfile(context, payload) {
+    context.commit('setUserProfile', payload);
+  },
+
+  setNewPassword(context, payload) {
+    context.commit('setNewPassword', payload);
   }
 };
