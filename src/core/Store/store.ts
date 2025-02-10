@@ -17,7 +17,7 @@ enum StatusEnum {
 }
 
 export default class Store<S = any> {
-  static instance: Store<any>;
+  static instance: Store;
 
   protected actions: ActionMap<S> = {};
   protected mutations: Record<string, Mutation<S>> = {};

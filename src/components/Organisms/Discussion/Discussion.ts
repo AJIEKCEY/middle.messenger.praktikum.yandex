@@ -1,7 +1,6 @@
 import Component from "../../../core/Component/component.ts";
 import template from "./discussion.tpl.ts";
 import "./discussion.css"
-//import {ComponentDataType, ComponentProps} from "../../../core/types.ts";
 import Input from "../../Atomics/Input/Input.ts";
 import Message from "../../Molecules/Message/Message.ts";
 import Avatar from "../Avatar/Avatar.ts";
@@ -9,6 +8,7 @@ import Socket from "../../../core/Socket.ts";
 import Conversation from "../Conversation/Conversation.ts";
 import Button from "../../Atomics/Button/Button.ts";
 import {ComponentProps} from "../../../core/types.ts";
+import Store from "../../../core/Store";
 
 interface MessageT {
   chat_id: number,
@@ -31,9 +31,12 @@ export default class Discussion extends Component{
   constructor(data?:ComponentProps){
     super(data)
 
-    this._store.events.on('chatId',this.updateComponent.bind(this));
+    if (Store?.events) {
+      Store.events.on('chatId', this.updateComponent.bind(this));
+    }
     this._socket = new Socket();
     document.addEventListener('WSOpen', this.getMessages.bind(this))
+
   }
 
   getButtonComponent(){

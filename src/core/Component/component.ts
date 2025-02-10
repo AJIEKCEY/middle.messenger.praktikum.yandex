@@ -16,7 +16,6 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     FLOW_RENDER: "flow:render"
   };
 
-
   protected _id: string;
   protected _element: HTMLElement | null = null;
   protected _props: ComponentProps;
@@ -138,9 +137,7 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
           eventsKeys.forEach((eventName: string): void => {
             const handlerName: string = eventsObject[eventName];
 
-            if (this._methods instanceof Object) {
-              (item as HTMLElement).removeEventListener(eventName, this._methods[handlerName]);
-            }
+            (item as HTMLElement).removeEventListener(eventName, this._methods[handlerName]);
           });
         }
 
