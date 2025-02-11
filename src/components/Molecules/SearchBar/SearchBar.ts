@@ -3,6 +3,7 @@ import Component from "../../../core/Component/component.ts";
 import template from "./searchBar.tpl.ts";
 import Input from "../../Atomics/Input/Input.ts";
 import Button from "../../Atomics/Button/Button.ts";
+import {ComponentProps} from "../../../core/types.ts";
 
 const searchInput = new Input({
   events: {
@@ -29,7 +30,7 @@ const searchButton = new Button({
   },
 });
 
-export default class SearchBar extends Component{
+export default class SearchBar extends Component<ComponentProps>{
   constructor() {
     super({
       SearchInput: searchInput,

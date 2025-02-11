@@ -4,7 +4,7 @@ import "./chat.css"
 import {ComponentProps} from "../../../core/types.ts";
 import Avatar from "../../Organisms/Avatar/Avatar.ts";
 
-export default class Chat extends Component{
+export default class Chat extends Component<ComponentProps>{
   constructor(data?:ComponentProps) {
     super({
       ...data,

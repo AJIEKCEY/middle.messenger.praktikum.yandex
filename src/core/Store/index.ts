@@ -2,6 +2,7 @@ import storeActions from './actions.ts';
 import storeMutations from './mutations.ts';
 import initialState from './state.ts';
 import Store from './store.ts';
+import {StoreParams} from "./types.ts";
 
 const storeConfig = {
   actions: storeActions,
@@ -9,4 +10,4 @@ const storeConfig = {
   state: initialState
 };
 
-export default new Store(storeConfig);
+export default new Store(storeConfig as StoreParams);

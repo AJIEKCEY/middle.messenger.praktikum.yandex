@@ -34,8 +34,8 @@ function trim(string: string, chars?: string): string {
 }
 
 function merge(lhs: Indexed, rhs: Indexed): Indexed {
-  for (let p in rhs) {
-    if (!rhs.hasOwnProperty(p)) {
+  for (const p in rhs) {
+    if (!Object.prototype.hasOwnProperty.call(rhs, p)){
       continue;
     }
 
@@ -45,7 +45,7 @@ function merge(lhs: Indexed, rhs: Indexed): Indexed {
       } else {
         lhs[p] = rhs[p];
       }
-    } catch (e) {
+    } catch (error) {
       lhs[p] = rhs[p];
     }
   }
@@ -124,7 +124,7 @@ function cloneDeep<T extends Indexed>(obj: T) {
     // Handle:
     // * Array
     if (item instanceof Array) {
-      let copy: ReturnType<typeof _cloneDeep>[] = [];
+      const copy: ReturnType<typeof _cloneDeep>[] = [];
 
       item.forEach((_, i) => (copy[i] = _cloneDeep(item[i])));
 
@@ -134,7 +134,7 @@ function cloneDeep<T extends Indexed>(obj: T) {
     // Handle:
     // * Set
     if (item instanceof Set) {
-      let copy = new Set();
+      const copy = new Set();
 
       item.forEach(v => copy.add(_cloneDeep(v)));
 
@@ -144,7 +144,7 @@ function cloneDeep<T extends Indexed>(obj: T) {
     // Handle:
     // * Map
     if (item instanceof Map) {
-      let copy = new Map();
+      const copy = new Map();
 
       item.forEach((v, k) => copy.set(k, _cloneDeep(v)));
 
@@ -154,7 +154,7 @@ function cloneDeep<T extends Indexed>(obj: T) {
     // Handle:
     // * Object
     if (item instanceof Object) {
-      let copy: Indexed = {};
+      const copy: Indexed = {};
 
       // Handle:
       // * Object.symbol
@@ -215,10 +215,10 @@ function queryStringify(data: StringIndexed): string | never {
 }
 
 function getCookie(name:string) {
-  let cookieArr = document.cookie.split(";");
+  const cookieArr = document.cookie.split(";");
 
   for(let i = 0; i < cookieArr.length; i++) {
-    let cookiePair = cookieArr[i].split("=");
+    const cookiePair = cookieArr[i].split("=");
 
     if(name == cookiePair[0].trim()) {
       return decodeURIComponent(cookiePair[1]);

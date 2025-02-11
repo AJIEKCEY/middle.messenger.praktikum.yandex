@@ -3,7 +3,7 @@ import template from "./button.tpl.ts";
 import {ComponentProps, Methods} from "../../../core/types.ts";
 
 
-export default class Button extends Component{
+export default class Button extends Component<ComponentProps>{
   protected _events?:Methods;
 
   constructor(data?:ComponentProps) {

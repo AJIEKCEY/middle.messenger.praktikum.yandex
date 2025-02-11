@@ -12,10 +12,11 @@ import Avatar from "../../components/Organisms/Avatar/Avatar.ts";
 
 import Router from "../../core/Router/Router.ts";
 import Store from "../../core/Store";
+import {ComponentProps} from "../../core/types.ts";
 
 const router = new Router()
 
-export default class Profile extends Component{
+export default class Profile extends Component<ComponentProps>{
 
   protected userData:{[key:string]:string} = {};
   private profileApi: ProfileApi = new ProfileApi();
@@ -79,7 +80,7 @@ export default class Profile extends Component{
   }
 
   // Reusable method to generate form controls
-  private generateFormControls(formFields: { [key: string]: any }) {
+  private generateFormControls(formFields: { [key: string]: Record<string, unknown> }) {
     return Object.keys(formFields).map(
       (field) => new FormControl({ ...formFields[field], value: this.userData[field] })
     );

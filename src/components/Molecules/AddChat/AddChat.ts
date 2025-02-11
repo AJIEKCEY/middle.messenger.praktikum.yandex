@@ -4,6 +4,7 @@ import template from "./addChat.tpl.ts";
 import Input from "../../Atomics/Input/Input.ts";
 import Button from "../../Atomics/Button/Button.ts";
 import addChatApi from "./addChatApi.ts";
+import {ComponentProps} from "../../../core/types.ts";
 
 const addChatInput = new Input({
   attr: {
@@ -32,7 +33,7 @@ const addChatButton = new Button({
   },
 });
 
-export default class AddChat extends Component{
+export default class AddChat extends Component<ComponentProps>{
   constructor() {
     super({
       AddChatInput: addChatInput,

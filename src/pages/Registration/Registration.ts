@@ -9,6 +9,7 @@ import registrationApi from "./registrationApi.ts";
 import FormControl from "../../components/Molecules/FormControl/FormControl.ts";
 import Form from "../../components/Molecules/Form/Form.ts";
 import Link from "../../components/Atomics/Link/Link.ts";
+import {ComponentProps} from "../../core/types.ts";
 
 
 const router = new Router()
@@ -17,7 +18,7 @@ const controls = [];
 
 for (const field in REGISTRATION_FORM){
 
-  if (field === 'registrationBtn' && REGISTRATION_FORM[field].hasOwnProperty('events')){
+  if (field === 'registrationBtn' && 'events' in REGISTRATION_FORM[field]){
     REGISTRATION_FORM[field].events = {
       click: async function (e: Event) {
         e.preventDefault();
@@ -74,7 +75,7 @@ const authorizationLink = new Link({
   }
 })
 
-export default class Registration extends Component{
+export default class Registration extends Component<ComponentProps>{
   constructor() {
     super({
       RegistrationForm:registrationForm,

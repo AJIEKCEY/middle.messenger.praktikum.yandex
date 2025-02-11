@@ -1,22 +1,23 @@
 import Store from "./store.ts";
 
 export interface State {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
-export interface StoreParams<S = any> {
-  actions: ActionMap<S>;
-  mutations: Record<string, Mutation<S>>;
-  state: S;
-}
-export interface ActionMap<S = any> {
-  [key: string]: Action<S>;
-}
+export type Action = (store: Store, payload: unknown) => void;
+export type Mutation = (state: State, payload: unknown) => void;
 
-export interface MutationMap<S = any> {
-  [key: string]: Mutation<S>;
+
+export interface StoreParams {
+  actions: ActionMap;
+  mutations: Record<string, Mutation>;
+  state: State;
 }
 
-export type Action<S = any> = (store: Store<S>, payload?: any) => void;
+export interface ActionMap {
+  [key: string]: Action;
+}
 
-export type Mutation<S = any> = (state: S, payload?: any) => void;
+export interface MutationMap {
+  [key: string]: Mutation;
+}

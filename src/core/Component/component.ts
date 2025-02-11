@@ -7,7 +7,7 @@ import {
 } from '../types.ts';
 import PropsManager from '../PropsManager.ts';
 
-export default class Component <ComponentData extends ComponentDataType = {}> {
+export default class Component <ComponentData extends ComponentDataType> {
   // события жизненного цикла компонента
   static EVENTS = {
     INIT: "init",
@@ -98,10 +98,11 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
   // did update
   private _componentDidUpdate(prevProps: ComponentProps | unknown, nextProps: ComponentProps | unknown):void {
     this.componentDidUpdate(prevProps, nextProps);
-    console.log('Component did update: ', this.constructor.name);
   }
 
-  componentDidUpdate(_prevProps?: ComponentProps | unknown, _nextProps?: ComponentProps | unknown) {}
+  componentDidUpdate(_prevProps?: ComponentProps | unknown, _nextProps?: ComponentProps | unknown) {
+    console.log(`Component did update: ${this.constructor.name}. ${JSON.stringify(_prevProps)} => ${JSON.stringify(_nextProps)}`);
+  }
 
   dispatchComponentDidUpdate(prevProps: ComponentProps, nextProps: ComponentProps):void {
     this._eventBus().emit(Component.EVENTS.FLOW_CDU, prevProps, nextProps);
@@ -109,7 +110,7 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
 
   // добавляем подписки на события при удалении компонента
   private _addEvents(): void {
-    const { events }: {[key: string]: any} = this._props;
+    const events = this._props.events as { [key: string]: (event: Event) => void } | undefined;
 
     if (events){
       Object.keys(events).forEach(eventName => {

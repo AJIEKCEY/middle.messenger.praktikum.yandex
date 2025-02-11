@@ -5,10 +5,11 @@ import "./settings.css"
 import Router from "../../core/Router/Router.ts";
 import Link from "../../components/Atomics/Link/Link.ts";
 import HTTPTransport from "../../core/api.ts";
+import {ComponentProps} from "../../core/types.ts";
 
 const router = new Router()
 
-const links:Component[] = [];
+const links:Component<ComponentProps>[] = [];
 
 const page404 = new Link({
   title: 'Ошибка 404',
@@ -102,7 +103,7 @@ const logout = new Link({
 
 links.push(logout);
 
-export default class Settings extends Component{
+export default class Settings extends Component<ComponentProps>{
   constructor() {
     super({
       links: links

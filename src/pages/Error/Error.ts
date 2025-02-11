@@ -4,11 +4,12 @@ import Link from "../../components/Atomics/Link/Link.ts";
 import Router from "../../core/Router/Router.ts";
 
 import "./error.css"
+import {ComponentProps} from "../../core/types.ts";
 
 const router = new Router()
 
-export default class Error extends Component{
-  constructor(data:any) {
+export default class Error extends Component<ComponentProps>{
+  constructor(data: ComponentProps) {
     super({
       ...data,
       Back : new Link({

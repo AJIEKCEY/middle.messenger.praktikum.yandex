@@ -10,7 +10,7 @@ import chatListApi from "./chatListApi.ts";
 
 const router = new Router()
 
-export default class ChatList extends Component{
+export default class ChatList extends Component<ComponentProps>{
   protected _chatList:ComponentProps[] = [];
   constructor() {
     super({
@@ -67,7 +67,7 @@ export default class ChatList extends Component{
         const chatId = currentTarget.dataset.chatId;
         const chatName = (currentTarget.querySelector(".chat__info > h4"))?.innerHTML
         this.clearSelectedChatUi();
-        if (chatId){
+        if (chatId && chatName){
           this.setCurrentChatActiveUi(chatId)
           // Интересный момент. Если нижние 2 строки поменять местами, то обработчик на изменение chatId отработает
           // раньше, чем установится значение chatName, которое как раз используется в этом обработчике.

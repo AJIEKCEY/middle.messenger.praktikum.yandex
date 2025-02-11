@@ -8,9 +8,9 @@ export default class Router {
   private static __instance: Router;
 
   protected routes: Route[] | undefined;
-  protected history: any;
+  protected history: History = window.history;
   protected _currentRoute: unknown;
-  protected _rootComponent: unknown;
+  protected _rootComponent: Component<Record<string, unknown>> | null = null;
 
   constructor() {
     if (Router.__instance) {
@@ -18,22 +18,20 @@ export default class Router {
     }
 
     this.routes = [];
-    this.history = window.history;
     this._currentRoute = null;
-    this._rootComponent = null;
 
     Router.__instance = this;
   }
 
-  use(pathname: string, block: ComponentC, isPublicRoot = false) {
-    const route = new Route(pathname, block, isPublicRoot);
+  use(pathname: string, block: ComponentC) {
+    const route = new Route(pathname, block);
 
     this.routes?.push(route);
 
     return this;
   }
 
-  start(rootComponent: Component) {
+  start(rootComponent: Component<Record<string, unknown>>) {
     if (rootComponent === undefined){
       throw new Error('Root component is undefined!');
     }
@@ -47,15 +45,16 @@ export default class Router {
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname:string, params: string|undefined = undefined) {
+  _onRoute(pathname: string, queryParams?: string): void {
     const route = this.getRoute(pathname);
-    if (!route) {
-      return;
-    }
+    if (!route) return;
 
-    this._currentRoute = route;
+   const currentPage = route.get(pathname, queryParams);
+   this._currentRoute = route;
+   if (this._rootComponent){
+     this._rootComponent.setProps({ currentPage }); // Use extracted variable
+   }
 
-    (<Component>this._rootComponent).setProps({currentPage: route.get(pathname, params)});
   }
 
   go(pathname:string) {

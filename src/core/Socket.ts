@@ -52,7 +52,7 @@ export default class Socket {
     return this._socket;
   }
 
-  public obtain(callback: Function){
+  public obtain(callback: (event: MessageEvent) => void): void {
     this._socket?.addEventListener('message', event => callback(event));
   }
 

@@ -3,7 +3,7 @@ import Component from "../../../core/Component/component.ts";
 import template from "./message.tpl.ts";
 import {ComponentProps} from "../../../core/types.ts";
 
-export default class Message extends Component{
+export default class Message extends Component<ComponentProps>{
   constructor(data?: ComponentProps) {
     if (data && data.time){
       const time:string = data.time as string

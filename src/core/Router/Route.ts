@@ -8,12 +8,10 @@ export default class Route {
 
   protected _pathname: string;
   protected _block: ComponentC;
-  public isPublicRoot: Boolean;
 
-  constructor(pathname: string, block: ComponentC, isPublicRoot: boolean) {
+  constructor(pathname: string, block: ComponentC) {
     this._pathname = pathname;
     this._block = block;
-    this.isPublicRoot = isPublicRoot
   }
 
   get(pathname: string, params:string|undefined) {

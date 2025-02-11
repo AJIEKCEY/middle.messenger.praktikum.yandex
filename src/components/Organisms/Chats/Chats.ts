@@ -7,6 +7,7 @@ import Button from "../../Atomics/Button/Button.ts";
 import SearchBar from "../../Molecules/SearchBar/SearchBar.ts";
 import AddChat from "../../Molecules/AddChat/AddChat";
 import ChatList from "../ChatList/ChatList.ts";
+import {ComponentProps} from "../../../core/types.ts";
 
 const router = new Router();
 
@@ -24,7 +25,7 @@ const settingsButton = new Button({
 })
 
 
-export default class Chats extends Component{
+export default class Chats extends Component<ComponentProps>{
   constructor() {
     super({
       SearchBar: new SearchBar(),

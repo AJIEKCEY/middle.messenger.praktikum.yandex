@@ -2,7 +2,7 @@ type HttpHeaders = {[key: string]: string}
 
 type Options = {
   method: string;
-  data?: any;
+  data?: unknown;
   headers?: HttpHeaders
 };
 
@@ -62,7 +62,7 @@ export default class HTTPTransport {
       if (method == 'GET' || !data ){
         xhr.send();
       } else if (method == 'PUT'){
-        xhr.send(data);
+        xhr.send(data as Document | XMLHttpRequestBodyInit | null);
       } else {
         xhr.send(JSON.stringify(data));
       }

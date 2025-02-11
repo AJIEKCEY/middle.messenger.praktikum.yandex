@@ -21,7 +21,7 @@ interface MessageT {
   user_id: number
 }
 
-export default class Discussion extends Component{
+export default class Discussion extends Component<ComponentProps>{
   protected _socket;
   protected _messages: Record<number, MessageT[]> = {};
   protected _userId: number = 0;
@@ -78,8 +78,8 @@ export default class Discussion extends Component{
   }
 
   openWSConnection(){
-    this._chatId = this._store.state.chatId;
-    this._userId = this._store.state.userId;
+    this._chatId = this._store.state.chatId as number;
+    this._userId = this._store.state.userId as number;
     if(this._chatId && this._userId)
       this._socket.connect(this._chatId, this._userId);
   }
@@ -103,13 +103,13 @@ export default class Discussion extends Component{
       content: '0',
       type: 'get old',
     });
-    this._socket.obtain((event:any) => {
+    this._socket.obtain((event: MessageEvent) => {
 
       const messages = JSON.parse(event.data);
-      if (!this._messages[this._chatId]) {
+      if (Array.isArray(messages)) {
         this._messages[+this._chatId] = messages;
       } else {
-        this._messages[this._chatId].push(messages);
+        this._messages[+this._chatId].push(messages);
       }
       const messagesList = this._messages[this._chatId].map(( message:MessageT ) =>
         new Message({

@@ -9,15 +9,18 @@ import {serialize} from "../../utils/baseUtil.ts";
 import loginApi from "./loginApi.ts";
 import FormControl from "../../components/Molecules/FormControl/FormControl.ts";
 import Form from "../../components/Molecules/Form/Form.ts";
+import {ComponentProps} from "../../core/types.ts";
 
 
 const router = new Router()
 
 const controls = [];
 
+const LOGIN_BUTTON_FIELD = 'loginBtn';
+
 for (const field in AUTHORIZATION_FORM){
 
-  if (field === 'loginBtn' && AUTHORIZATION_FORM[field].hasOwnProperty('events')){
+  if (field === LOGIN_BUTTON_FIELD && 'events' in AUTHORIZATION_FORM[field]){
     AUTHORIZATION_FORM[field].events = {
       click: async function (e: Event) {
         e.preventDefault();
@@ -73,7 +76,7 @@ const registrationLink = new Link({
   }
 })
 
-export default class Login extends Component{
+export default class Login extends Component<ComponentProps>{
   constructor() {
     super({
       LoginForm:logInForm,

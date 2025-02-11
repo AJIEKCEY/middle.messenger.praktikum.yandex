@@ -5,8 +5,9 @@ import HTTPTransport from "../core/api.ts";
 import Store from "../core/Store";
 
 import './app.css';
+import {ComponentProps} from "../core/types.ts";
 
-export default class App extends Component{
+export default class App extends Component<ComponentProps>{
   private constructor() {
     super();
   }

@@ -1,6 +1,7 @@
 import Component from "../core/Component/component.ts";
+import {ComponentProps} from "../core/types.ts";
 
-export default function render(query: string, component: Component): Element | null {
+export default function render(query: string, component: Component<ComponentProps>): Element | null {
 
   const root = document.querySelector(query);
 

@@ -5,7 +5,7 @@ import {ComponentProps} from "../../../core/types.ts";
 import Input from "../../Atomics/Input/Input.ts";
 import Button from "../../Atomics/Button/Button.ts";
 
-export default class FormControl extends Component{
+export default class FormControl extends Component<ComponentProps>{
   constructor(data?:ComponentProps) {
     let formElement;
 
