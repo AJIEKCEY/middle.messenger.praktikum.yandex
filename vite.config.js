@@ -2,6 +2,10 @@ import { defineConfig } from 'vite'
 import handlebars from 'vite-plugin-handlebars';
 
 export default defineConfig({
+  build: {
+    outDir: 'dist', // Папка для сборки
+    assetsDir: 'assets', // Папка для ассетов
+  },
   plugins: [
     handlebars({
       helpers: {

@@ -3,7 +3,7 @@ export default `
   <label class="avatar__label" for="avatar">
     {{{ Avatar }}}
   </label>
-  {{{ InputFile }}}
+  {{{ AvatarInput }}}
   <div class="profile__data">
   {{#switch currentView}}
     {{#case 'view'}}

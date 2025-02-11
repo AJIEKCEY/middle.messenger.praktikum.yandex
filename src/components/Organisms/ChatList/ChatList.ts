@@ -2,13 +2,10 @@ import Component from "../../../core/Component/component.ts";
 import template from "./chats.tpl.ts"
 
 import "./chats.css"
-import Router from "../../../core/Router/Router.ts";
 import Store from "../../../core/Store"
 import {ComponentProps} from "../../../core/types.ts";
 import Chat from "../../Molecules/Chat/Chat.ts";
 import chatListApi from "./chatListApi.ts";
-
-const router = new Router()
 
 export default class ChatList extends Component<ComponentProps>{
   protected _chatList:ComponentProps[] = [];
@@ -38,8 +35,6 @@ export default class ChatList extends Component<ComponentProps>{
             return this.getNewChatComponent(chatProps);
           })
           this.setProps({chats})
-        } else if (XHRResponse.status === 401){
-          router.go('/sign-in');
         } else {
           console.error(XHRResponse.responseText)
         }

@@ -53,7 +53,6 @@ export default class Profile extends Component<ComponentProps>{
         Store.events.on("userProfile", this.updateProfileData.bind(this));
         Store.events.on("newPassword", this.updatePassword.bind(this));
     }
-
   }
 
   // Update user profile data after form submission
@@ -61,7 +60,8 @@ export default class Profile extends Component<ComponentProps>{
     if (Store?.state?.userProfile){
       this.profileApi
         .sendUserProfile(Store?.state?.userProfile)
-        .then(() => this._updateProfileComponentState());
+        .then(() => this._updateProfileComponentState())
+        .catch(err => console.error(err));
     }
 
   }
@@ -71,7 +71,8 @@ export default class Profile extends Component<ComponentProps>{
     if (Store?.state?.userProfile) {
       this.profileApi
         .sendNewPassword(Store.state.newPassword)
-        .then(() => this._updateProfileComponentState());
+        .then(() => this._updateProfileComponentState())
+        .catch(err => console.error(err));
     }
   }
 
@@ -146,7 +147,6 @@ export default class Profile extends Component<ComponentProps>{
       click: () => router.back(),
     },
   });
-
 
   override render(): void {
     this.compile(template, this._props);

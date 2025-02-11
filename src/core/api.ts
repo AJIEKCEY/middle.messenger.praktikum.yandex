@@ -1,3 +1,7 @@
+import Router from "./Router/Router.ts";
+
+const router = new Router()
+
 type HttpHeaders = {[key: string]: string}
 
 type Options = {
@@ -52,6 +56,9 @@ export default class HTTPTransport {
       this._setHeaders(xhr, headers);
 
       xhr.onload = function() {
+        if (xhr.readyState === 4 && xhr.status === 401) {
+          router.go('/sign-in');
+        }
         resolve(xhr);
       };
 
