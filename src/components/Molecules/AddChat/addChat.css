@@ -1,0 +1,12 @@
+input.chats_add__input{
+  width: 100%;
+  background-color: var(--color-gray-219);
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-left: 20px;
+}
+
+.chats_add__btn{
+  padding: 7px;
+  margin: 0 10px;
+}
