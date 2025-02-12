@@ -1,7 +1,8 @@
 import HTTPTransport from "../../core/api.ts";
+import {BASE_URL_HTTP_API} from "../../core/consts.ts";
 
 const httpTransport = new HTTPTransport();
-const host = 'https://ya-praktikum.tech/api/v2/auth/signup';
+const host = `${BASE_URL_HTTP_API}/auth/signup`;
 
 export default (data: unknown) => {
   return httpTransport.post(host, {data});

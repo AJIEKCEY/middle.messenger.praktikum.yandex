@@ -1,9 +1,10 @@
 import HTTPTransport from "./api.ts";
 import EventBus from "./EventBus.ts";
+import {BASE_URL_WS_API,BASE_URL_HTTP_API} from "./consts.ts";
 
 export default class Socket {
-  private _hostWS = 'wss://ya-praktikum.tech/ws';
-  private _hostHTTP = 'https://ya-praktikum.tech';
+  private _hostWS = BASE_URL_WS_API;
+  private _hostHTTP = BASE_URL_HTTP_API;
   private _httpTransport: HTTPTransport;
   protected _chatId: number = 0;
   protected _token: string = '';
@@ -18,7 +19,7 @@ export default class Socket {
   }
 
   private async getToken():Promise<boolean>{
-    const result = await this._httpTransport.post(`${this._hostHTTP}/api/v2/chats/token/${this._chatId}`, {});
+    const result = await this._httpTransport.post(`${this._hostHTTP}/chats/token/${this._chatId}`, {});
     this._token = JSON.parse(result.responseText).token;
     return true
   }

@@ -147,7 +147,6 @@ export default class Component <ComponentData extends ComponentDataType> {
     }
   }
 
-  // TODO В чем отличия следующих 2 методов?
   protected addAttributes(): void {
     const { attr = {} } = this._props;
     if (attr){
@@ -159,13 +158,19 @@ export default class Component <ComponentData extends ComponentDataType> {
     }
   }
 
-  protected setAttributes(attr: string): void {
+  protected setAttributes(attr: Record<string, string>): void {
     if (attr){
       Object.entries(attr).forEach(([key, value]) => {
         if (this._element) {
           this._element.setAttribute(key, value as string);
         }
       });
+    }
+  }
+
+  protected removeAttribute(attrName:string):void{
+    if (this._element) {
+      this._element.removeAttribute(attrName);
     }
   }
 

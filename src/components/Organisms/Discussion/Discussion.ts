@@ -67,6 +67,7 @@ export default class Discussion extends Component<ComponentProps>{
         keyup: (e:KeyboardEvent) => {
           const message = (e.target as HTMLInputElement)?.value.trim()
           if (e.key === 'Enter' && message.length > 0) {
+            (e.target as HTMLInputElement).value = ''
             this._socket.send({
                 content: message,
                 type: 'message',
