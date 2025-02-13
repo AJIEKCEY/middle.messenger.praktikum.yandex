@@ -1,26 +1,25 @@
 import Component from "../../core/Component/component.ts";
 import template from "./profile.tpl.ts";
-
 import "./profile.css"
+
 import ProfileApi from "./profileApi.ts";
 import Link from "../../components/Atomics/Link/Link.ts";
-import {CHANGEPASSWORD_FORM, CHANGEUSERDATA_FORM} from "../../utils/formsDescription.ts";
+import Input from "../../components/Atomics/Input/Input.ts";
 import FormControl from "../../components/Molecules/FormControl/FormControl.ts";
 import Form from "../../components/Molecules/Form/Form.ts";
-import Input from "../../components/Atomics/Input/Input.ts";
 import Avatar from "../../components/Organisms/Avatar/Avatar.ts";
-
 import Router from "../../core/Router/Router.ts";
 import Store from "../../core/Store";
 import {ComponentProps} from "../../core/types.ts";
-
-const router = new Router()
+import {BASE_URL_HTTP_API} from "../../core/consts.ts";
+import {CHANGEPASSWORD_FORM, CHANGEUSERDATA_FORM} from "../../utils/formsDescription.ts";
 
 export default class Profile extends Component<ComponentProps>{
 
   protected userData:{[key:string]:string} = {};
   private profileApi: ProfileApi = new ProfileApi();
   private form = new Form();
+  private router: Router = new Router();
 
   constructor() {
     super();
@@ -42,7 +41,7 @@ export default class Profile extends Component<ComponentProps>{
     this.setProps({
       userData: this.userData,
       currentView: "view",
-      Avatar: new Avatar({ avatar: this.userData?.avatar, attr: { class: "avatar" } }),
+      Avatar: new Avatar({ avatar: this.userData?.avatar, baseUrl: BASE_URL_HTTP_API, attr: { class: "avatar" } }),
       AvatarInput: this.avatarInput,
       EditData: this.editDataLink,
       GoBack: this.goToSettingsLink,
@@ -144,7 +143,7 @@ export default class Profile extends Component<ComponentProps>{
     title: "Назад",
     href: "javascript:void(0);",
     events: {
-      click: () => router.back(),
+      click: () => this.router.back(),
     },
   });
 

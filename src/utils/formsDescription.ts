@@ -357,22 +357,23 @@ export const CHANGEPASSWORD_FORM: { [key: string]: ComponentProps } = {
         e.preventDefault();
         e.stopPropagation();
 
-        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
-        const formEl = e.target?.form;
-        const formElements = formEl.querySelectorAll('input');
-        let valid = true;
-        formElements.forEach((element: HTMLInputElement) => {
-          if (element.value.length === 0)
-            element.classList.add('warning');
-          if (element.classList.contains('warning')) {
-            valid = false
-          }
-        })
+        const formEl = (e.target as HTMLButtonElement)?.form;
+        if (formEl){
+          const formElements = formEl.querySelectorAll('input');
+          let valid = true;
+          formElements.forEach((element: HTMLInputElement) => {
+            if (element.value.length === 0)
+              element.classList.add('warning');
+            if (element.classList.contains('warning')) {
+              valid = false
+            }
+          })
 
-        if (valid) {
-          const formData = new FormData(formEl)
-          //@ts-expect-error    this будет связываться (bind) с контекстом компонента
-          this._store.dispatch('setNewPassword', serialize(formData))
+          if (valid) {
+            const formData = new FormData(formEl)
+            //@ts-expect-error    this будет связываться (bind) с контекстом компонента
+            this._store.dispatch('setNewPassword', serialize(formData))
+          }
         }
       }
     }
@@ -395,24 +396,108 @@ export const CHANGEUSERDATA_FORM: { [key: string]: ComponentProps } = {
         e.preventDefault();
         e.stopPropagation();
 
-        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
-        const formEl = e.target?.form;
-        const formElements = formEl.querySelectorAll('input');
-        let valid = true;
-        formElements.forEach((element: HTMLInputElement) => {
-          if (element.value.length === 0)
-            element.classList.add('warning');
-          if (element.classList.contains('warning')) {
-            valid = false
-          }
-        })
+        const formEl = (e.target as HTMLButtonElement)?.form;
+        if (formEl){
+          const formElements = formEl.querySelectorAll('input');
+          let valid = true;
+          formElements.forEach((element: HTMLInputElement) => {
+            if (element.value.length === 0)
+              element.classList.add('warning');
+            if (element.classList.contains('warning')) {
+              valid = false
+            }
+          })
 
-        if (valid) {
-          const formData = new FormData(formEl)
-          //@ts-expect-error    this будет связываться (bind) с контекстом компонента
-          this._store.dispatch('setUserProfile', serialize(formData))
+          if (valid) {
+            const formData = new FormData(formEl)
+            //@ts-expect-error    this будет связываться (bind) с контекстом компонента
+            this._store.dispatch('setUserProfile', serialize(formData))
+          }
         }
       }
     }
   }
+}
+
+export const SEND_MESSAGES_FORM: { [key: string]: ComponentProps } = {
+  message: {
+    id: 'conversation_message',
+    tag: 'input',
+    type: 'text',
+    name: 'message',
+    placeholder: 'Введите сообщение'
+  },
+  sendMsgBtn: {
+    text: ' > ',
+    id: 'sendMsgBtn',
+    tag: 'button'
+  }
+}
+
+export const ADD_CHAT_FORM: { [key: string]: ComponentProps } = {
+  chatName: {
+    id: 'chats__addChat',
+    tag: 'input',
+    type: 'text',
+    name: 'message',
+    placeholder: 'Имя чата',
+  },
+  sendMsgBtn: {
+    text: 'Добавить',
+    id: 'chats__addChatBtn',
+    tag: 'button',
+  }
+}
+
+export const MANAGE_CHAT_USERS_FORM: { [key: string]: ComponentProps } = {
+  chatName: {
+    id: 'chat__userIds',
+    tag: 'input', //manageUsers
+    type: 'text',
+    name: 'users',
+    placeholder: 'Ид пользователей через ","',
+    hasError: false,
+    validationMessage: VALIDATION_MESSAGES.manageUsers,
+    events: {
+      blur: function () {
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
+        const input: HTMLInputElement = this.getContent() as HTMLInputElement;
+        const regex: RegExp = VALIDATION_RULES.manageUsers;
+        const valid = regex.test(input.value);
+
+        //@ts-expect-error    this будет связываться (bind) с контекстом компонента
+        this.setProps({
+          value: input.value,
+          hasError: !valid,
+        });
+      }
+    }
+  },
+
+  addUserBtn: {
+    text: '+',
+    id: 'chat__addChatBtn',
+    tag: 'button',
+    events: {
+      click: function (e: Event) {
+        const formEl = (e.target as HTMLInputElement)?.form;
+        if (formEl){
+          formEl.dataset.action = "add"
+        }
+      }
+    }
+  },
+  deleteUserBtn: {
+    text: '-',
+    id: 'chat__deleteChatBtn',
+    tag: 'button',
+    events: {
+      click: function (e: Event) {
+        const formEl = (e.target as HTMLInputElement)?.form;
+        if (formEl){
+          formEl.dataset.action = "delete"
+        }
+      }
+    }
+  },
 }

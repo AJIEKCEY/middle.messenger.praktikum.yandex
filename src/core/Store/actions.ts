@@ -20,5 +20,9 @@ export default {
 
   setNewPassword(context:Store, payload:State) {
     context.commit('setNewPassword', payload);
+  },
+
+  setIsAuthenticated(context:Store, payload:State) {
+    context.commit('setIsAuthenticated', payload);
   }
 };

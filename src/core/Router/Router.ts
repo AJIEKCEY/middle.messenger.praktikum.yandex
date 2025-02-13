@@ -32,32 +32,33 @@ export default class Router {
   }
 
   start(rootComponent: Component<Record<string, unknown>>) {
-    if (rootComponent === undefined){
+    if (rootComponent === undefined) {
       throw new Error('Root component is undefined!');
     }
 
     this._rootComponent = rootComponent;
 
-    window.onpopstate = ((event:Event) => {
+    window.onpopstate = ((event: Event) => {
       this._onRoute((event.currentTarget as Window)?.location.pathname);
-    }).bind(this);
+    });
 
     this._onRoute(window.location.pathname);
   }
 
   _onRoute(pathname: string, queryParams?: string): void {
     const route = this.getRoute(pathname);
-    if (!route) return;
+    if (!route) {
+      return;
+    }
 
-   const currentPage = route.get(pathname, queryParams);
-   this._currentRoute = route;
-   if (this._rootComponent){
-     this._rootComponent.setProps({ currentPage }); // Use extracted variable
-   }
-
+    const currentPage = route.get(pathname, queryParams);
+    this._currentRoute = route;
+    if (this._rootComponent) {
+      this._rootComponent.setProps({currentPage}); // Use extracted variable
+    }
   }
 
-  go(pathname:string) {
+  go(pathname: string) {
     const {path, params} = this.parsePathName(pathname)
     this.history.pushState({}, '', path);
     this._onRoute(path, params);
@@ -71,17 +72,17 @@ export default class Router {
     this.history.forward();
   }
 
-  getRoute(pathname:string) {
+  getRoute(pathname: string) {
     return this.routes?.find(route => route.match(pathname));
   }
 
-  parsePathName(pathname:string){
+  parsePathName(pathname: string) {
     let path;
     let params = undefined;
 
     const searchParamsDivider = pathname.indexOf('?');
-    if (searchParamsDivider > 0){
-      path = pathname.slice(0,searchParamsDivider);
+    if (searchParamsDivider > 0) {
+      path = pathname.slice(0, searchParamsDivider);
       params = pathname.slice(searchParamsDivider);
     } else {
       path = pathname;

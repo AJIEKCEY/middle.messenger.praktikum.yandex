@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const router = new Router();
 
   router
-    .use("/", Messenger)
+    .use("/", Login)
     .use("/messenger", Messenger)
     .use("/sign-in", Login )
     .use("/sign-up", Registration)

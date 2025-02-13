@@ -1,4 +1,5 @@
 import Router from "./Router/Router.ts";
+import Store from "./Store";
 
 const router = new Router()
 
@@ -57,6 +58,7 @@ export default class HTTPTransport {
 
       xhr.onload = function() {
         if (xhr.readyState === 4 && xhr.status === 401) {
+          Store.dispatch('setIsAuthenticated', false)
           router.go('/sign-in');
         }
         resolve(xhr);
@@ -69,6 +71,8 @@ export default class HTTPTransport {
       if (method == 'GET' || !data ){
         xhr.send();
       } else if (method == 'PUT'){
+        xhr.send(data as Document | XMLHttpRequestBodyInit | null);
+      } else if (method == 'DELETE'){
         xhr.send(data as Document | XMLHttpRequestBodyInit | null);
       } else {
         xhr.send(JSON.stringify(data));

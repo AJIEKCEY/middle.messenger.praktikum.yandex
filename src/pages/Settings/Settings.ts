@@ -6,6 +6,7 @@ import Router from "../../core/Router/Router.ts";
 import Link from "../../components/Atomics/Link/Link.ts";
 import HTTPTransport from "../../core/api.ts";
 import {ComponentProps} from "../../core/types.ts";
+import {BASE_URL_HTTP_API} from "../../core/consts.ts";
 
 const router = new Router()
 
@@ -84,7 +85,7 @@ const logout = new Link({
       e.preventDefault();
 
       const httpTransport = new HTTPTransport();
-      const host = 'https://ya-praktikum.tech/api/v2/auth/logout';
+      const host = `${BASE_URL_HTTP_API}/auth/logout`;
 
       const options = {
         headers: {

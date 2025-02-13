@@ -24,5 +24,10 @@ export default {
   setNewPassword(state: State, payload: object) {
     state.newPassword = payload;
     return state;
+  },
+
+  setIsAuthenticated(state: State, payload: object) {
+    state.isAuthenticated = payload;
+    return state;
   }
 };

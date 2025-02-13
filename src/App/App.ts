@@ -6,6 +6,7 @@ import Store from "../core/Store";
 
 import './app.css';
 import {ComponentProps} from "../core/types.ts";
+import {BASE_URL_HTTP_API} from "../core/consts.ts";
 
 export default class App extends Component<ComponentProps>{
   private constructor() {
@@ -15,11 +16,13 @@ export default class App extends Component<ComponentProps>{
   static async initialize(){
     const httpTransport = new HTTPTransport();
 
-    const response = await httpTransport.get('https://ya-praktikum.tech/api/v2/auth/user', {})
+    const response = await httpTransport.get(`${BASE_URL_HTTP_API}/auth/user`, {})
 
     const userId = JSON.parse(response.responseText)?.id;
-    Store.dispatch('setUserId', userId)
-
+    if (userId){
+      Store.dispatch('setUserId', userId);
+      Store.dispatch('setIsAuthenticated', true);
+    }
 
     return new App()
   }
