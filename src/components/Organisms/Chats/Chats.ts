@@ -16,7 +16,7 @@ const settingsButton = new Button({
     click: (e: Event) => {
       e.preventDefault();
       e.stopPropagation();
-      router.go("/settings")
+      router.go("/links")
     },
   },
   attr: {

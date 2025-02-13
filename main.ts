@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     .use("/messenger", Messenger)
     .use("/sign-in", Login )
     .use("/sign-up", Registration)
-    .use("/profile", Profile)
-    .use("/settings", Settings)
+    .use("/links", Settings)
+    .use("/settings", Profile)
     .use("/error", Error)
     .start(app)
 

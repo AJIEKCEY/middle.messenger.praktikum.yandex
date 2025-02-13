@@ -22,6 +22,11 @@ export default class ChatList extends Component<ComponentProps>{
       this.setProps({chats: this.filteredChats(evt.detail)})
     })
 
+    document.addEventListener('chatListChange', () => {
+      console.log('chatListChange emited')
+      this.getChatList()
+    })
+
     this.getChatList()
   }
 
