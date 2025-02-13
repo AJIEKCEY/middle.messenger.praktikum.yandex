@@ -1,14 +1,18 @@
 import Component from "../../../core/Component/component.ts";
-import template from "./discussion.tpl.ts";
-import "./discussion.css"
-import Input from "../../Atomics/Input/Input.ts";
+//import Input from "../../Atomics/Input/Input.ts";
+//import Button from "../../Atomics/Button/Button.ts";
 import Message from "../../Molecules/Message/Message.ts";
 import Avatar from "../Avatar/Avatar.ts";
 import Socket from "../../../core/Socket.ts";
 import Conversation from "../Conversation/Conversation.ts";
-import Button from "../../Atomics/Button/Button.ts";
-import {ComponentProps} from "../../../core/types.ts";
 import Store from "../../../core/Store";
+import {ComponentProps} from "../../../core/types.ts";
+import template from "./discussion.tpl.ts";
+import "./discussion.css"
+import Form from "../../Molecules/Form/Form.ts";
+import FormControl from "../../Molecules/FormControl/FormControl.ts";
+import {SEND_MESSAGES_FORM} from "../../../utils/formsDescription.ts";
+
 
 interface MessageT {
   chat_id: number,
@@ -22,6 +26,7 @@ interface MessageT {
 }
 
 export default class Discussion extends Component<ComponentProps>{
+  private _form = new Form();
   protected _socket;
   protected _messages: Record<number, MessageT[]> = {};
   protected _userId: number = 0;
@@ -39,45 +44,6 @@ export default class Discussion extends Component<ComponentProps>{
 
   }
 
-  getButtonComponent(){
-    return new Button({
-      id: 'messageSend',
-      text: ' > ',
-      events: {
-        click: () => {
-          const input = document.getElementById('messageInput') as HTMLInputElement
-          const message = input.value.trim()
-          if (message.length > 0) {
-            this._socket.send({
-              content: message,
-              type: 'message',
-            });
-          }
-        }
-      }
-    })
-  }
-
-  getInputComponent(){
-    return new Input({
-      id: 'messageInput',
-      type: 'text',
-      name: 'messageInput',
-      events: {
-        keyup: (e:KeyboardEvent) => {
-          const message = (e.target as HTMLInputElement)?.value.trim()
-          if (e.key === 'Enter' && message.length > 0) {
-            (e.target as HTMLInputElement).value = ''
-            this._socket.send({
-                content: message,
-                type: 'message',
-              });
-          }
-        }
-      }
-    })
-  }
-
   openWSConnection(){
     this._chatId = this._store.state.chatId as number;
     this._userId = this._store.state.userId as number;
@@ -90,8 +56,7 @@ export default class Discussion extends Component<ComponentProps>{
     const chatName =  this._store.state.chatName;
     this.setProps({
       avatar: new Avatar({attr:{class:'avatar'}}),
-      DiscussionInput: this.getInputComponent(),
-      DiscussionSendButton: this.getButtonComponent(),
+      SendMessageForm: this.getMessageForm(),
       chatName: chatName,
       Conversation: this._Conversation
     })
@@ -125,6 +90,41 @@ export default class Discussion extends Component<ComponentProps>{
 
       console.log(JSON.parse(event.data))
     });
+  }
+
+  private onSubmitForm(e: Event){
+    e.preventDefault();
+    e.stopPropagation();
+    const input = document.getElementById('conversation_message') as HTMLInputElement
+    const message = input.value.trim()
+    if (message.length > 0) {
+      input.value = ''
+      this._socket.send({
+        content: message,
+        type: 'message',
+      });
+    }
+  }
+
+  private generateFormControls(formFields: { [key: string]: Record<string, unknown> }) {
+    return Object.keys(formFields).map(
+      (field) => new FormControl({ ...formFields[field]})
+    );
+  }
+
+  private setFormProps() {
+    const controls = this.generateFormControls(SEND_MESSAGES_FORM);
+    this._form.setProps({
+      controls,
+      events: {
+        submit: this.onSubmitForm.bind(this),
+      }
+    });
+  }
+
+  getMessageForm(){
+    this.setFormProps();
+    return this._form;
   }
 
   override render(): void{

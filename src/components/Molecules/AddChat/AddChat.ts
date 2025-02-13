@@ -1,44 +1,61 @@
 import "./addChat.css"
 import Component from "../../../core/Component/component.ts";
 import template from "./addChat.tpl.ts";
-import Input from "../../Atomics/Input/Input.ts";
-import Button from "../../Atomics/Button/Button.ts";
 import addChatApi from "./addChatApi.ts";
 import {ComponentProps} from "../../../core/types.ts";
+import FormControl from "../FormControl/FormControl.ts";
+import {ADD_CHAT_FORM} from "../../../utils/formsDescription.ts";
+import Form from "../Form/Form.ts";
 
-const addChatInput = new Input({
-  attr: {
-    class: 'chats_add__input',
-  },
-});
+export default class AddChat extends Component<ComponentProps>{
+  private _form = new Form();
+  constructor() {
+    super();
 
-const addChatButton = new Button({
-  text: 'Добавить',
-  events: {
-    click: (e: Event) => {
-      e.preventDefault();
-      const chatName = (e.target as HTMLElement)?.closest('form')?.querySelector<HTMLInputElement>('.chats_add__input')?.value;
-      if (!chatName) return
-      addChatApi(chatName)
+    this.updateComponent()
+  }
+
+  updateComponent(){
+    this.setProps({
+      AddChatForm: this.getAddChatForm(),
+    })
+  }
+
+  private onSubmitForm(e: Event){
+    e.preventDefault();
+    e.stopPropagation();
+    const addChatEl = (e.target as HTMLElement)?.closest('form')?.querySelector<HTMLInputElement>('#chats__addChat');
+    if (addChatEl && addChatEl.value ){
+      addChatApi(addChatEl.value)
         .then(XHRResponse => {
           console.log(XHRResponse.responseText)
+          addChatEl.value = '';
         })
         .catch(e => {
           console.log(e);
         })
-    },
-  },
-  attr: {
-    class: 'chats_add__btn',
-  },
-});
+    }
+  }
 
-export default class AddChat extends Component<ComponentProps>{
-  constructor() {
-    super({
-      AddChatInput: addChatInput,
-      AddChatButton: addChatButton,
+  private generateFormControls(formFields: { [key: string]: Record<string, unknown> }) {
+    return Object.keys(formFields).map(
+      (field) => new FormControl({ ...formFields[field]})
+    );
+  }
+
+  private setFormProps() {
+    const controls = this.generateFormControls(ADD_CHAT_FORM);
+    this._form.setProps({
+      controls,
+      events: {
+        submit: this.onSubmitForm.bind(this),
+      }
     });
+  }
+
+  getAddChatForm(){
+    this.setFormProps();
+    return this._form;
   }
 
   render() {

@@ -1,6 +1,5 @@
 export default `
-<form class="searchBar">
-  {{{AddChatInput}}}
-  {{{AddChatButton}}}
-</form>
+<div class="chats__addChat">
+  {{{AddChatForm}}}
+</div>
 `

@@ -1,19 +1,18 @@
 import Component from "../../core/Component/component.ts";
 import template from "./profile.tpl.ts";
-
 import "./profile.css"
+
 import ProfileApi from "./profileApi.ts";
 import Link from "../../components/Atomics/Link/Link.ts";
-import {CHANGEPASSWORD_FORM, CHANGEUSERDATA_FORM} from "../../utils/formsDescription.ts";
+import Input from "../../components/Atomics/Input/Input.ts";
 import FormControl from "../../components/Molecules/FormControl/FormControl.ts";
 import Form from "../../components/Molecules/Form/Form.ts";
-import Input from "../../components/Atomics/Input/Input.ts";
 import Avatar from "../../components/Organisms/Avatar/Avatar.ts";
-
 import Router from "../../core/Router/Router.ts";
 import Store from "../../core/Store";
 import {ComponentProps} from "../../core/types.ts";
 import {BASE_URL_HTTP_API} from "../../core/consts.ts";
+import {CHANGEPASSWORD_FORM, CHANGEUSERDATA_FORM} from "../../utils/formsDescription.ts";
 
 export default class Profile extends Component<ComponentProps>{
 

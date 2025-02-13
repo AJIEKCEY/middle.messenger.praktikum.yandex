@@ -1,4 +1,15 @@
-input.chats_add__input{
+.chats__addChat form {
+  display: flex;
+  flex-basis: 0;
+  align-items: center;
+}
+
+.chats__addChat form>.form-control:first-child {
+  width: 100%;
+  margin-right: 20px;
+}
+
+.chats__addChat input {
   width: 100%;
   background-color: var(--color-gray-219);
   border-radius: 5px;
@@ -6,7 +17,10 @@ input.chats_add__input{
   margin-left: 20px;
 }
 
-.chats_add__btn{
+.chats__addChat button {
   padding: 7px;
+  background-color: var(--color-lightskyblue);
   margin: 0 10px;
+  cursor: pointer;
+  border-radius: 10px;
 }
