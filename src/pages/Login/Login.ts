@@ -10,6 +10,7 @@ import loginApi from "./loginApi.ts";
 import FormControl from "../../components/Molecules/FormControl/FormControl.ts";
 import Form from "../../components/Molecules/Form/Form.ts";
 import {ComponentProps} from "../../core/types.ts";
+import Store from "../../core/Store";
 
 
 const router = new Router()
@@ -82,8 +83,15 @@ export default class Login extends Component<ComponentProps>{
       LoginForm:logInForm,
       RegistrationLink: registrationLink,
     });
-  }
 
+    setTimeout(()=>{
+      if(Store.state.isAuthenticated){
+        router.go('/messenger');
+      } else {
+        this.removeAttribute('hidden')
+      }
+    },0)
+  }
 
   override render() {
     this.compile(template, this._props);

@@ -4,5 +4,5 @@ export default {
   userId: 0,
   chatId: 0,
   chatName: '',
-  isAuthenticated: true,
+  isAuthenticated: false,
 };

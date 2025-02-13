@@ -40,14 +40,17 @@ export default class Router {
 
     window.onpopstate = ((event:Event) => {
       this._onRoute((event.currentTarget as Window)?.location.pathname);
-    }).bind(this);
+    });
 
     this._onRoute(window.location.pathname);
   }
 
   _onRoute(pathname: string, queryParams?: string): void {
     const route = this.getRoute(pathname);
-    if (!route) return;
+    if (!route) {
+      this.go("/error?kod=404&message=Не туда попали");
+      return;
+    }
 
    const currentPage = route.get(pathname, queryParams);
    this._currentRoute = route;

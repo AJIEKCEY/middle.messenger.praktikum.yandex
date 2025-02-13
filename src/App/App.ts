@@ -19,7 +19,10 @@ export default class App extends Component<ComponentProps>{
     const response = await httpTransport.get(`${BASE_URL_HTTP_API}/auth/user`, {})
 
     const userId = JSON.parse(response.responseText)?.id;
-    Store.dispatch('setUserId', userId)
+    if (userId){
+      Store.dispatch('setUserId', userId);
+      Store.dispatch('setIsAuthenticated', true);
+    }
 
     return new App()
   }
