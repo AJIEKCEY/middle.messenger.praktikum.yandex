@@ -1,6 +1,4 @@
 import Component from "../../../core/Component/component.ts";
-//import Input from "../../Atomics/Input/Input.ts";
-//import Button from "../../Atomics/Button/Button.ts";
 import Message from "../../Molecules/Message/Message.ts";
 import Avatar from "../Avatar/Avatar.ts";
 import Socket from "../../../core/Socket.ts";
@@ -12,7 +10,7 @@ import "./discussion.css"
 import Form from "../../Molecules/Form/Form.ts";
 import FormControl from "../../Molecules/FormControl/FormControl.ts";
 import {SEND_MESSAGES_FORM} from "../../../utils/formsDescription.ts";
-
+import ManageChatUsers from "../../Molecules/ManageChatUsers/ManageChatUsers.ts";
 
 interface MessageT {
   chat_id: number,
@@ -56,6 +54,7 @@ export default class Discussion extends Component<ComponentProps>{
     const chatName =  this._store.state.chatName;
     this.setProps({
       avatar: new Avatar({attr:{class:'avatar'}}),
+      ManageChatUsers: new ManageChatUsers(),
       SendMessageForm: this.getMessageForm(),
       chatName: chatName,
       Conversation: this._Conversation

@@ -72,6 +72,8 @@ export default class HTTPTransport {
         xhr.send();
       } else if (method == 'PUT'){
         xhr.send(data as Document | XMLHttpRequestBodyInit | null);
+      } else if (method == 'DELETE'){
+        xhr.send(data as Document | XMLHttpRequestBodyInit | null);
       } else {
         xhr.send(JSON.stringify(data));
       }

@@ -1,9 +1,10 @@
 export default `
   <input
-    type="{{ type }}"
-    id="{{ id }}"
-    name="{{ name }}"
+    type="{{type}}"
+    id="{{id}}"
+    name="{{name}}"
     class="{{#if hasError}}warning{{/if}}"
+    placeholder="{{placeholder}}"
     value="{{value}}"
   >
 `

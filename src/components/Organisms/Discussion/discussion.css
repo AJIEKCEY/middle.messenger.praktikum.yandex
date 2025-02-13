@@ -34,10 +34,6 @@
   cursor: pointer;
 }
 
-.header__menu:hover {
-  font-size: 1.5em;
-}
-
 .discussion__sendMessage {
   padding: 20px;
 }
