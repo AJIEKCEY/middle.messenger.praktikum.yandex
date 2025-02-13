@@ -44,7 +44,7 @@ const profile = new Link({
   events: {
     click: (e:Event) => {
       e.preventDefault();
-      router.go("/profile");
+      router.go("/settings");
     },
   },
 })

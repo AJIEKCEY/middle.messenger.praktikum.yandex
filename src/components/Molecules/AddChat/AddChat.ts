@@ -30,6 +30,7 @@ export default class AddChat extends Component<ComponentProps>{
         .then(XHRResponse => {
           console.log(XHRResponse.responseText)
           addChatEl.value = '';
+          document.dispatchEvent(new Event("chatListChange"));
         })
         .catch(e => {
           console.log(e);
