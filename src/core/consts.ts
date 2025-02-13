@@ -1,6 +1,6 @@
 const DOMAIN = 'ya-praktikum.tech';
 const PROTOCOL_HTTP = 'https';
-const PROTOCOL_WS = 'ws';
+const PROTOCOL_WS = 'wss';
 const PATH_HTTP_API = 'api/v2';
 const PATH_WS_API = 'ws';
 

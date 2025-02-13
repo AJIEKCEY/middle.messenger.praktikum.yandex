@@ -15,7 +15,7 @@ export default class profileApi extends HTTPTransport{
   }
 
   async sendAvatar(data: FormData){
-    await this.put(`${BASE_URL_HTTP_API}user/profile/avatar`, {
+    await this.put(`${BASE_URL_HTTP_API}/user/profile/avatar`, {
       headers: {
         'Accept': 'application/json',
       },
@@ -24,13 +24,13 @@ export default class profileApi extends HTTPTransport{
   }
 
   async sendUserProfile(data: unknown){
-    await this.put(`${BASE_URL_HTTP_API}user/profile`, {
+    await this.put(`${BASE_URL_HTTP_API}/user/profile`, {
       data: JSON.stringify(data)
     })
   }
 
   async sendNewPassword(data: unknown){
-    await this.put(`${BASE_URL_HTTP_API}user/password`, {
+    await this.put(`${BASE_URL_HTTP_API}/user/password`, {
       data: JSON.stringify(data)
     })
   }
