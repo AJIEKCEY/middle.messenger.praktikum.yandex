@@ -18,7 +18,7 @@ export default  class ManageChatUsersApi extends HTTPTransport {
       chatId: this.chatId
     }
 
-    await this.put(this.host, {
+    return await this.put(this.host, {
       data: JSON.stringify(payload),
     })
   }
@@ -29,7 +29,7 @@ export default  class ManageChatUsersApi extends HTTPTransport {
       chatId: this.chatId
     }
 
-    await this.delete(this.host, {
+    return await this.delete(this.host, {
       data: JSON.stringify(payload),
     })
   }

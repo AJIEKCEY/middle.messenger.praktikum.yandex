@@ -33,9 +33,15 @@ export default class ManageChatUsers extends Component<ComponentProps>{
       const action = form.dataset.action;
 
       if (action === "add"){
-        this.manageChatUsersApi.addUsers(userIds);
+        this.manageChatUsersApi.addUsers(userIds)
+          .then((res) => {
+            if (res.response === 'OK') inputEl.value = '';
+          });
       } else if (action === "delete") {
-        this.manageChatUsersApi.deleteUsers(userIds);
+        this.manageChatUsersApi.deleteUsers(userIds)
+          .then((res) => {
+            if (res.response === 'OK') inputEl.value = '';
+          });
       } else {
         return
       }
