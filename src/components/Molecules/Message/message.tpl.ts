@@ -5,10 +5,10 @@ export default `
 <div class="message__item message__item_left" >
 {{/if}}
   <div class="message_content">
-    <p>{{ value }}</p>
+    <p>{{ content }}</p>
   </div>
   <div class="message_time">
-    {{ timestamp }}
+    {{ time }}
   </div>
 </div>
 `

@@ -1,12 +1,14 @@
 import Handlebars from "handlebars";
 import {v4 as makeUUID} from "uuid"
 import EventBus from "../EventBus.ts";
+import Store from "../Store"
 import {
   ComponentProps, Methods, ChildComponents, ComponentDataType,
 } from '../types.ts';
 import PropsManager from '../PropsManager.ts';
 
-export default class Component <ComponentData extends ComponentDataType = {}> {
+export default class Component <ComponentData extends ComponentDataType> {
+  // события жизненного цикла компонента
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -20,6 +22,7 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
   protected _children: ChildComponents;
   protected _methods: Methods;
   protected _eventBus;
+  protected _store;
 
   //protected _setUpdate = false;
 
@@ -33,11 +36,13 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     this._children = componentDescriptor._children;
     this._methods = componentDescriptor._methods;
 
+    this._store = Store;
     this._eventBus = () => eventBus;
     this._registerEvents(eventBus);
     this._eventBus().emit(Component.EVENTS.INIT);
   }
 
+  //подписываемся на события жизненного цикла
   private _registerEvents(eventBus: EventBus) : void {
     eventBus.on(Component.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -45,9 +50,13 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     eventBus.on(Component.EVENTS.FLOW_RENDER, this.render.bind(this));
   }
 
+  //проксируем свойства компонента
   private _makePropsProxy(baseProps: ComponentProps): ComponentProps {
     return new Proxy(baseProps, {
-      get: (target: ComponentProps, property: string): unknown => target[property],
+      get: (target: ComponentProps, property: string): unknown => {
+        const value = target[property];
+        return typeof value === "function" ? value.bind(target) : value;
+      },
       set: (target: ComponentProps, property: string, value: unknown): boolean => {
         target[property] = value;
 
@@ -55,6 +64,7 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
 
         return true;
       },
+
       deleteProperty: (_target: ComponentProps, property: string): boolean => {
         throw new Error(`Нельзя удалить свойство ${property}`);
       },
@@ -66,33 +76,53 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     this._element.setAttribute('data-id', this._id);
   }
 
+  //инициализируем компонент
   protected init(): void {
     this._createResources();
     this._eventBus().emit(Component.EVENTS.FLOW_RENDER);
   }
 
-  componentDidMount():void {}
-
+  // обработчики событий жизненного цикла
+  //did mount
   private _componentDidMount():void {
     this.componentDidMount();
     console.log('Component did mount: ', this.constructor.name);
   }
 
+  componentDidMount():void {}
+
   dispatchComponentDidMount():void {
     this._eventBus().emit(Component.EVENTS.FLOW_CDM);
   }
 
-
-  componentDidUpdate(_prevProps?: ComponentProps | unknown, _nextProps?: ComponentProps | unknown) {}
-
+  // did update
   private _componentDidUpdate(prevProps: ComponentProps | unknown, nextProps: ComponentProps | unknown):void {
     this.componentDidUpdate(prevProps, nextProps);
+  }
+
+  componentDidUpdate(_prevProps?: ComponentProps | unknown, _nextProps?: ComponentProps | unknown) {
+    console.log(`Component did update: ${this.constructor.name}. ${JSON.stringify(_prevProps)} => ${JSON.stringify(_nextProps)}`);
   }
 
   dispatchComponentDidUpdate(prevProps: ComponentProps, nextProps: ComponentProps):void {
     this._eventBus().emit(Component.EVENTS.FLOW_CDU, prevProps, nextProps);
   }
 
+  // добавляем подписки на события при удалении компонента
+  private _addEvents(): void {
+    const events = this._props.events as { [key: string]: (event: Event) => void } | undefined;
+
+    if (events){
+      Object.keys(events).forEach(eventName => {
+        if (this._element) {
+
+          this._element.addEventListener(eventName, events[eventName]);
+        }
+      });
+    }
+  }
+
+  // удаляем подписки на события при удалении компонента
   private _removeEvents():void {
     const nodes: NodeList | undefined = this._element?.querySelectorAll('[events]');
 
@@ -108,9 +138,7 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
           eventsKeys.forEach((eventName: string): void => {
             const handlerName: string = eventsObject[eventName];
 
-            if (this._methods instanceof Object) {
-              (item as HTMLElement).removeEventListener(eventName, this._methods[handlerName]);
-            }
+            (item as HTMLElement).removeEventListener(eventName, this._methods[handlerName]);
           });
         }
 
@@ -130,7 +158,7 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     }
   }
 
-  protected setAttributes(attr: string): void {
+  protected setAttributes(attr: Record<string, string>): void {
     if (attr){
       Object.entries(attr).forEach(([key, value]) => {
         if (this._element) {
@@ -140,19 +168,13 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     }
   }
 
-  private _addEvents(): void {
-    const { events }: {[key: string]: any} = this._props;
-
-    if (events){
-      Object.keys(events).forEach(eventName => {
-        if (this._element) {
-
-          this._element.addEventListener(eventName, events[eventName]);
-        }
-      });
+  protected removeAttribute(attrName:string):void{
+    if (this._element) {
+      this._element.removeAttribute(attrName);
     }
   }
 
+  // компилируем шаблон
   public compile(template: string, props: ComponentProps):void {
     if (this._element instanceof HTMLElement) {
       const templateNode:HTMLTemplateElement = document.createElement('template');
@@ -187,10 +209,12 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     }
   }
 
+  //рендерим шаблон
   render():void {
     if (this._element instanceof HTMLElement) this._element.innerHTML = '';
   }
 
+  //устанавливаем св-ва компонента.
   public setProps = (nextProps: ComponentProps):void => {
     if (!nextProps) {
       return;
@@ -205,15 +229,17 @@ export default class Component <ComponentData extends ComponentDataType = {}> {
     this.dispatchComponentDidUpdate(prevProps, this._props);
   };
 
-  public getId(): string{
-      return this._id ? this._id : ''
-  }
 
+  //TODO Зачем эти методы?
   public getContent(): HTMLElement {
     if (!this._element) {
       throw new Error('Element is not created');
     }
     return this._element as HTMLElement;
+  }
+
+  public getId(): string{
+      return this._id ? this._id : ''
   }
 
   public show() {

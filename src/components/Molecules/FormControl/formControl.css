@@ -15,7 +15,7 @@
 }
 
 .form-control label:has(+input) {
-  color: var(--color-gray);
+  color: var(--color-gray-153);
 }
 
 .form-control label:has(+input.warning) {

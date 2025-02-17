@@ -28,7 +28,7 @@
 }
 
 .entryform__item label {
-  color: var(--color-gray);
+  color: var(--color-gray-153);
   font-size: 0.8em;
   align-self: start;
 }

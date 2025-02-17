@@ -7,5 +7,6 @@ export default`
     <div class="commands_item">{{{Settings}}}</div>
   </div>
   {{{ChatList}}}
+  {{{AddChat}}}
 </div>
 `

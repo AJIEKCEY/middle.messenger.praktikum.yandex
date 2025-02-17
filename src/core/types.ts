@@ -2,7 +2,7 @@ import Component from './Component/component.ts';
 
 declare global {
   interface Window {
-    app:Component;
+    app:Component<ComponentProps>;
   }
 }
 
@@ -25,4 +25,8 @@ export interface ComponentProps {
 //   onClick?: (e: Event) => void;
 // }
 
-export type ChildComponents = Component[];
+export type ChildComponents = Component<ComponentProps>[];
+
+export interface ComponentC {
+  new (props: Record<string, unknown>): Component<Record<string, unknown>>;
+}

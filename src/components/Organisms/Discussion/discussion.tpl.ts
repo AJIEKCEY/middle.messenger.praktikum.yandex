@@ -1,19 +1,18 @@
 export default `
 <div class="discussion__wrapper">
   <div class="discussion__header">
-    {{{ avatar }}}
+    {{{ Avatar }}}
     <h2>{{chatName}}</h2>
-    <div class="header__menu">O</div>
+    <div class="header__menu">
+      {{{ManageChatUsers}}}
+    </div>
   </div>
   <div class="discussion__messages">
-    {{#each messages}}
-      {{{this}}}
-    {{/each}}
+    {{{Conversation}}}
   </div>
-  <div class="discussion__input">
-    <div class="discussion__input__buttons"></div>
-    {{{DiscussionInput}}}
-    <button> > </button>
+  <div class="discussion__sendMessage">
+    <div class="discussion__sendMessage__buttons"></div>
+    {{{SendMessageForm}}}
   </div>
 </div>
 `

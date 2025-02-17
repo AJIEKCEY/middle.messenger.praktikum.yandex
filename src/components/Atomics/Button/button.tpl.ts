@@ -1,3 +1,3 @@
 export default () => `
-  <button>{{ text }}</button>
+  <button id="{{id}}">{{ text }}</button>
 `

@@ -1,0 +1,32 @@
+.chat__manageUsers form {
+  display: flex;
+  flex-basis: 0;
+  align-items: center;
+}
+
+.chat__manageUsers form>.form-control:first-child {
+  width: 100%;
+  margin-right: 5px;
+}
+
+.chat__manageUsers input {
+  width: 100%;
+  background-color: var(--color-gray-219);
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+
+.chat__manageUsers button {
+  padding: 10px 15px;
+  background-color: var(--color-lightskyblue);
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.chat__manageUsers .form-control:has(input.warning) .validationMessage {
+  position: absolute;
+  top: 40px;
+  left: -50px;
+  line-height: 1.1;
+}
