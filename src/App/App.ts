@@ -1,7 +1,7 @@
 import Component from "../core/Component/component.ts";
 import template from "./app.tpl.ts"
 
-import HTTPTransport from "../core/api.ts";
+import HTTPTransport from "../core/HTTPTransport/HTTPTransport.ts";
 import Store from "../core/Store";
 
 import './app.css';

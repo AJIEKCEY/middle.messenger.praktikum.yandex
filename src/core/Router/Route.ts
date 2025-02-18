@@ -1,9 +1,5 @@
 import {ComponentC} from "../types.ts";
 
-const isEqual = (pathname:string, currPathname:string) => {
-  return pathname === currPathname;
-}
-
 export default class Route {
 
   protected _pathname: string;
@@ -15,28 +11,35 @@ export default class Route {
   }
 
   get(pathname: string, params:string|undefined) {
-    if (params){
-      if (this.match(pathname)) {
-        this._pathname = pathname;
-        if (this._block){
-            const searchParams = new URLSearchParams(params)
-            const properties = Object.fromEntries([...searchParams]);
-            return new this._block({...properties})
-        }
-      }
-    } else {
-      if (this.match(pathname)) {
-        this._pathname = pathname;
-        if (this._block){
-          return new this._block({})
-        }
+    if (this.match(pathname)) {
+      this._pathname = pathname;
+      if (this._block){
+        return this.getBlockInstance(params)
       }
     }
 
     return null
   }
 
+  getBlockInstance( params?:string) {
+    return new this._block(this.prepareParams(params))
+  }
+
+  prepareParams(params?:string):{[key: string]: unknown} {
+    let properties:{[key: string]: unknown} = {}
+    if (params){
+      const searchParams = new URLSearchParams(params)
+      properties = Object.fromEntries([...searchParams]);
+    }
+
+    return properties
+  }
+
   match(pathname:string) {
-    return isEqual(pathname, this._pathname);
+    return this.isEqual(pathname, this._pathname);
+  }
+
+  isEqual = (pathname:string, currPathname:string) => {
+    return pathname === currPathname;
   }
 }
