@@ -43,9 +43,10 @@
         "ts-node": "^10.9.2",
         "typescript": "^5.5.4",
         "typescript-eslint": "^8.8.1",
-        "vite": "^4.5.9"
+        "vite": "^6.1.0"
     },
     "dependencies": {
+        "esbuild": "^0.25.0",
         "handlebars": "^4.7.8",
         "uuid": "^10.0.0",
         "vite-plugin-handlebars": "^2.0.0"
