@@ -1,7 +1,7 @@
 import Handlebars from "handlebars";
 import {v4 as makeUUID} from "uuid"
 import EventBus from "../EventBus.ts";
-import Store from "../Store"
+import Store from "../Store/index.ts"
 import {
   ComponentProps, Methods, ChildComponents, ComponentDataType,
 } from '../types.ts';
@@ -229,8 +229,6 @@ export default class Component <ComponentData extends ComponentDataType> {
     this.dispatchComponentDidUpdate(prevProps, this._props);
   };
 
-
-  //TODO Зачем эти методы?
   public getContent(): HTMLElement {
     if (!this._element) {
       throw new Error('Element is not created');

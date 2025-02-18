@@ -8,9 +8,7 @@
         "build": "vite build",
         "start": "vite build && vite preview --port 3000",
         "lint": "eslint",
-        "lint:fix": "eslint --fix",
         "lint:style": "stylelint \"**/*.css\"",
-        "lint:style:fix": "stylelint \"**/*.css\" --fix",
         "test": "mocha",
         "prepare": "husky",
         "check": "npm-run-all --parallel lint lint:style test"
