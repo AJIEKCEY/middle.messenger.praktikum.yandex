@@ -1,1 +1,4 @@
-npm-run-all --parallel lint lint:style test
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx npm-run-all --parallel lint lint:style test
