@@ -1,5 +1,5 @@
-import Router from "./Router/Router.ts";
-import Store from "./Store";
+import Router from "../Router/Router.ts";
+import Store from "../Store/index.ts";
 
 const router = new Router()
 

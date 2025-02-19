@@ -15,6 +15,10 @@
 - Сборщик Vite
 - Handlebars
 - uuid
+- Chai
+- Mocha
+- Sinon
+- Husky
 
 ## Установка
 
@@ -24,6 +28,11 @@ npm install
 
 ```sh
 npm start
+```
+
+Для инициализации Husky
+```sh
+npm prepare
 ```
 
 ## Дизайн проект
@@ -40,4 +49,8 @@ npm start
 npx eslint "**/*.{js,ts}"
 npx stylelint "**/*.{css,scss,sass,styl,less,pcss}"
 npx tsc --noEmit
+```
+Запускает линтеры и тесты:
+```sh
+npm check
 ```
