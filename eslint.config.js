@@ -13,7 +13,8 @@ export default tseslint.config(
     ignores: [
       "**/dist/",
       "**/node_modules/",
-      "**/utils/baseUtil.ts"
+      "**/utils/baseUtil.ts",
+      "**/*.test.ts"
     ]
   }
 );

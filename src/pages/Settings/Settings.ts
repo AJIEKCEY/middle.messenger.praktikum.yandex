@@ -4,7 +4,7 @@ import template from "./settings.tpl.ts";
 import "./settings.css"
 import Router from "../../core/Router/Router.ts";
 import Link from "../../components/Atomics/Link/Link.ts";
-import HTTPTransport from "../../core/api.ts";
+import HTTPTransport from "../../core/HTTPTransport/HTTPTransport.ts";
 import {ComponentProps} from "../../core/types.ts";
 import {BASE_URL_HTTP_API} from "../../core/consts.ts";
 

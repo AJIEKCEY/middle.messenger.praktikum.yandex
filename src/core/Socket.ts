@@ -1,4 +1,4 @@
-import HTTPTransport from "./api.ts";
+import HTTPTransport from "./HTTPTransport/HTTPTransport.ts";
 import EventBus from "./EventBus.ts";
 import {BASE_URL_WS_API,BASE_URL_HTTP_API} from "./consts.ts";
 

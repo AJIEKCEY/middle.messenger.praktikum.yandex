@@ -1,4 +1,4 @@
-import HTTPTransport from "../../core/api.ts";
+import HTTPTransport from "../../core/HTTPTransport/HTTPTransport.ts";
 import {BASE_URL_HTTP_API} from "../../core/consts.ts";
 
 export default class profileApi extends HTTPTransport{
